@@ -1,4 +1,4 @@
-// Memory limit exceeded
+// Time limit exceeded (passes 314/315)
 
 class Solution {
     public int trap(int[] height) {
@@ -14,27 +14,19 @@ class Solution {
                 max = height[i];
         }
         
-        boolean[][] map = new boolean[max][height.length];
-        
-        // fill in the map
-        for(int i = 0; i < height.length; i++)
-        {
-            for(int j = 0; j < height[i]; j++)
-            {
-                map[j][i] = true;
-            }
-        }
         
       //  System.out.println(Arrays.deepToString(map).replace("],","\n"));
         
         int count = 0;
         
-        // iterate through each block in the map, checking left and right for filled boxes
-        for(int r = 0; r < map.length; r++)
+        // iterate through array for each row
+        for(int r = 1; r <= max; r++)
         {
-            for(int c = 0; c < map[0].length; c++)
+            // for the first row, check to the left and to the right
+            // looking for a 1 or greater
+            for(int c = 1; c < height.length - 1; c++)
             {
-               if(!map[r][c] && canHoldWater(map, r, c))
+               if(height[c] < r && canHoldWater(height, r, c))
                    count++;
             }
         }
@@ -42,7 +34,7 @@ class Solution {
         return count;
     }
     
-    public boolean canHoldWater(boolean[][] map, int r, int c)
+    public boolean canHoldWater(int[] height, int targetHeight, int c)
     {
       //  System.out.println(r + " " + c);
         
@@ -51,21 +43,21 @@ class Solution {
         
         int c2 = c;
         
-        // look to the right using c2
-        for(; c2 < map[0].length; c2++)
+        // look to the right
+        for(; c2 < height.length; c2++)
         {
            // System.out.println("Loop: " + map[r][c2] + ", " + r  + ", " + c2);
-            if(map[r][c2] == true)
+            if(height[c2] >= targetHeight)
             {
                 boxToTheRight = true;
                 break;
             }
         }
         
-        // look to the left using c
+        // look to the left
         for(; c >= 0; c--)
         {
-            if(map[r][c] == true)
+            if(height[c] >= targetHeight)
             {
                 boxToTheLeft = true;
                 break;
