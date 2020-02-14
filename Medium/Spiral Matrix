@@ -1,0 +1,163 @@
+/*
+https://leetcode.com/problems/spiral-matrix/
+*/
+
+class Solution {
+    
+    public List<Integer> spiralOrder(int[][] matrix) {
+        // Accepted
+        // 0 ms, faster than 100%
+        // 37.5 mb, less than 5.21%
+        
+        if(matrix == null || matrix.length == 0)
+            return new ArrayList();
+        
+        int totalLength = matrix.length * matrix[0].length;
+        int iterated = 0;
+        
+        ArrayList<Integer> ans = new ArrayList<>();
+        
+        boolean[][] visited = new boolean[matrix.length][matrix[0].length];
+        
+        int r = 0, c = 0;
+        
+        boolean canMove = true;
+        
+        // right, down, left, up
+        int[][] dirs = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+        int dir = 0;
+        
+        int dirR = 0;
+        int dirC = 1;
+        
+        while(iterated < totalLength)
+        {
+            ans.add(matrix[r][c]);
+                    
+            visited[r][c] = true;
+            
+            // if it can't move in that direction
+            if( !(inBounds(matrix, r + dirR, c + dirC) && !visited[r + dirR][c + dirC]) )
+            {
+                dir = (dir + 1) % 4; // then change direction   
+                dirR = dirs[dir][0];
+                dirC = dirs[dir][1];
+            }
+            
+            // move in that direction
+            
+            r += dirR;
+            c += dirC;
+            
+            
+            iterated++;
+        }
+        
+        return ans;
+    }
+    
+    public boolean inBounds(int[][] matrix, int r, int c)
+    {
+        if(r < 0 || r >= matrix.length || c < 0 || c >= matrix[0].length)
+            return false;
+        else
+            return true;
+    }
+    
+    /*
+    public List<Integer> spiralOrder(int[][] matrix) {
+        // Wrong answer
+        // takes the wrong path (not a spiral for big matrices)
+        
+        if(matrix == null || matrix.length == 0)
+            return new ArrayList();
+        
+        ArrayList<Integer> ans = new ArrayList<>();
+        
+        boolean[][] visited = new boolean[matrix.length][matrix[0].length];
+        
+        int r = 0, c = 0;
+        
+        boolean canMove = true;
+        
+        while(canMove)
+        {
+            System.out.println(r + " " + c + " " + matrix[r][c]);
+            // check right
+            
+            System.out.println("checking right: ");
+            if(inBounds(matrix, r, c + 1) && !visited[r][c+1])
+            {
+                System.out.println(true);
+                // save current element
+                ans.add(matrix[r][c]);
+                
+                visited[r][c] = true;
+                
+                // move element
+                c++;
+                
+                continue;
+            }
+            // check down
+            
+            System.out.println("checking down: ");
+             if(inBounds(matrix, r + 1, c) && !visited[r + 1][c])
+            {
+                System.out.println(true);
+                // save current element
+                ans.add(matrix[r][c]);
+                
+                visited[r][c] = true;
+                
+                // move element
+                r++;
+                
+                continue;
+            }
+            // check left
+            
+            System.out.println("checking left: ");
+             if(inBounds(matrix, r, c - 1) && !visited[r][c - 1])
+            {
+                System.out.println(true);
+                // save current element
+                ans.add(matrix[r][c]);
+                
+                visited[r][c] = true;
+                
+                // move element
+                c--;
+                
+                continue;
+            }
+            // check up
+            
+            System.out.println("checking up: ");
+            if(inBounds(matrix, r - 1, c) && !visited[r - 1][c])
+            {
+                System.out.println(true);
+                // save current element
+                ans.add(matrix[r][c]);
+                
+                visited[r][c] = true;
+                
+                // move element
+                r--;
+                
+                continue;
+            }
+            
+            canMove = false;
+        }
+        
+        ans.add(matrix[r][c]);
+        
+        return ans;
+        
+    }
+    */
+    
+}
+
+// total time taken to solve: 59 mins
