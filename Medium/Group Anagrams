@@ -1,0 +1,155 @@
+/*
+https://leetcode.com/problems/group-anagrams/
+*/
+
+class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        if(strs.length == 0)
+            return null;
+        
+        // Runtime, I think:
+        // O(N * Mlog(M))
+        // where N is the number of words, and M is the length of the longest word in strs 
+        char[][] sorted = new char[strs.length][];
+        
+        HashMap<String, List<String>> map = new HashMap<>();
+        
+        String curWord = "";
+        String curWordSorted = "";
+        
+        for(int i = 0; i < strs.length; i++)
+        {
+            curWord = strs[i];
+            char[] curWordArray = curWord.toCharArray();
+            
+            Arrays.sort(curWordArray);
+            
+            curWordSorted = new String(curWordArray);
+            
+            if(map.containsKey(curWordSorted))
+                map.get(curWordSorted).add(curWord);
+            else
+            {
+                map.put(curWordSorted, new ArrayList<String>());
+                map.get(curWordSorted).add(curWord);
+            }
+        }
+        
+        List<List<String>> answer = new ArrayList<>();
+        
+        // create the final list of lists using the hashmap
+        for(List<String> list : map.values())
+            answer.add(list);
+        
+        
+        return answer;
+    }
+    
+    public List<List<String>> ga(String[] strs) {
+        if(strs.length == 0)
+            return null;
+        
+        List<List<String>> result = new ArrayList<>();
+        result.add(new ArrayList<String>());
+        result.get(0).add(strs[0]);
+        
+        iterateStrs:
+        for(int i = 1; i < strs.length; i++)
+        {
+            for(int j = 0; j < result.size(); j++)
+            {
+                if(isAnagram(result.get(j).get(0), strs[i]))
+                {
+                    result.get(j).add(strs[i]);
+                    continue iterateStrs;
+                }
+            }
+            
+            // if it didn't find a group to put strs[i] in
+            result.add(new ArrayList<String>());
+            result.get(result.size() - 1).add(strs[i]);
+        
+        }
+        
+        return result;
+    }
+    
+    public boolean isAnagram(String str1, String str2)
+    {
+        int[] alphabet1 = new int[26];
+        int[] alphabet2 = new int[26];
+        
+        for(char c : str1.toCharArray())
+            alphabet1[c - 'a']++;
+        
+        for(char c : str2.toCharArray())
+            alphabet2[c - 'a']++;
+        
+        // compare both arrays
+        for(int i = 0; i < 26; i++)
+        {
+            if(alphabet1[i] != alphabet2[i])
+                return false;
+        }
+        
+        return true;
+    }
+}
+
+/*
+class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        // Runtime:
+        // O(N^2)
+        // this occurs worst when every word is different
+    
+        if(strs.length == 0)
+            return null;
+        
+        List<List<String>> result = new ArrayList<>();
+        result.add(new ArrayList<String>());
+        result.get(0).add(strs[0]);
+        
+        iterateStrs:
+        for(int i = 1; i < strs.length; i++)
+        {
+            for(int j = 0; j < result.size(); j++)
+            {
+                if(isAnagram(result.get(j).get(0), strs[i]))
+                {
+                    result.get(j).add(strs[i]);
+                    continue iterateStrs;
+                }
+            }
+            
+            // if it didn't find a group to put strs[i] in
+            result.add(new ArrayList<String>());
+            result.get(result.size() - 1).add(strs[i]);
+        
+        }
+        
+        return result;
+    }
+    
+    public boolean isAnagram(String str1, String str2)
+    {
+        int[] alphabet1 = new int[26];
+        int[] alphabet2 = new int[26];
+        
+        for(char c : str1.toCharArray())
+            alphabet1[c - 'a']++;
+        
+        for(char c : str2.toCharArray())
+            alphabet2[c - 'a']++;
+        
+        // compare both arrays
+        for(int i = 0; i < 26; i++)
+        {
+            if(alphabet1[i] != alphabet2[i])
+                return false;
+        }
+        
+        return true;
+    }
+}
+*/
