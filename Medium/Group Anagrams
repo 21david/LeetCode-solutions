@@ -7,9 +7,16 @@ class Solution {
         if(strs.length == 0)
             return null;
         
-        // Runtime, I think:
+        // Runtime:
         // O(N * Mlog(M))
-        // where N is the number of words, and M is the length of the longest word in strs 
+        // where N is the number of words, and M is the length of the longest word in strs
+        // each word is sorted then added to the hashmap
+        // Mlog(M) to sort a word, and N because each word has to be considered, thus N * Mlog(M)
+        
+        // A more optimal solution is to create a key using a hash function instead of sorting each word
+        // hash function can be written cleverly with prime numbers
+        // leetcode.com/problems/group-anagrams/discuss/566709/Java-or-4ms
+        
         char[][] sorted = new char[strs.length][];
         
         HashMap<String, List<String>> map = new HashMap<>();
@@ -44,61 +51,13 @@ class Solution {
         
         return answer;
     }
-    
-    public List<List<String>> ga(String[] strs) {
-        if(strs.length == 0)
-            return null;
-        
-        List<List<String>> result = new ArrayList<>();
-        result.add(new ArrayList<String>());
-        result.get(0).add(strs[0]);
-        
-        iterateStrs:
-        for(int i = 1; i < strs.length; i++)
-        {
-            for(int j = 0; j < result.size(); j++)
-            {
-                if(isAnagram(result.get(j).get(0), strs[i]))
-                {
-                    result.get(j).add(strs[i]);
-                    continue iterateStrs;
-                }
-            }
-            
-            // if it didn't find a group to put strs[i] in
-            result.add(new ArrayList<String>());
-            result.get(result.size() - 1).add(strs[i]);
-        
-        }
-        
-        return result;
-    }
-    
-    public boolean isAnagram(String str1, String str2)
-    {
-        int[] alphabet1 = new int[26];
-        int[] alphabet2 = new int[26];
-        
-        for(char c : str1.toCharArray())
-            alphabet1[c - 'a']++;
-        
-        for(char c : str2.toCharArray())
-            alphabet2[c - 'a']++;
-        
-        // compare both arrays
-        for(int i = 0; i < 26; i++)
-        {
-            if(alphabet1[i] != alphabet2[i])
-                return false;
-        }
-        
-        return true;
-    }
 }
 
 /*
 class Solution {
     public List<List<String>> groupAnagrams(String[] strs) {
+        // time limit exceeded
+    
         // Runtime:
         // O(N^2)
         // this occurs worst when every word is different
