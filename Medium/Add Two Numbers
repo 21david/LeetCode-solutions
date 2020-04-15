@@ -10,16 +10,15 @@ https://leetcode.com/problems/add-two-numbers/
  *     ListNode(int x) { val = x; }
  * }
  */
- 
 class Solution {
     
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         
         // 2 ms, faster than 63.72%
+        // (on 3rd submit, it ran 1 ms, faster than 100%)
         // 39.7 mb, less than 99.69%
         
         ListNode t1 = l1;
-        
         ListNode t2 = l2;
         
         
@@ -176,7 +175,7 @@ class Solution {
     
     
     // using strings and actual addition (with BigInteger)
-     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+     public ListNode addTwoNumbers2(ListNode l1, ListNode l2) {
         
         // 22 ms, faster than 5.07%
         // 40.8 mb, less than 93.73%
