@@ -4,6 +4,12 @@ https://leetcode.com/problems/construct-binary-search-tree-from-preorder-travers
 LeetCode 30 Day Challenge, day 20
 */
 
+/*
+Inorder: Left, Root, Right (L P R)
+Preorder: Root, Left, Right (P L R)
+Postorder: Left, Right, Root (L R P)
+*/
+
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -13,6 +19,7 @@ LeetCode 30 Day Challenge, day 20
  *     TreeNode(int x) { val = x; }
  * }
  */
+
 class Solution {
     public TreeNode bstFromPreorder(int[] input) {
         if(input.length == 0)
