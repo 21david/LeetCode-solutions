@@ -1,0 +1,20 @@
+/*
+https://leetcode.com/explore/featured/card/may-leetcoding-challenge/534/week-1-may-1st-may-7th/3317/
+
+May 30-day LeetCoding, day 2
+*/
+
+class Solution {
+    
+    public int numJewelsInStones2(String J, String S) {
+        // faster than 70.51%
+        
+        int count = 0;
+        
+        for(char c : S.toCharArray())
+            if(J.indexOf(c) >= 0)
+                count++;
+        
+        return count;
+    }
+}
