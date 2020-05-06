@@ -8,6 +8,7 @@ class Solution {
     
     public int firstUniqChar(String s) {
         // 5 ms, faster than 94.54%
+        // 40.1 mb, less than 5.71%
         // runtime: O(N)
         
         // make an array to serve as a multiset and fill it (O(N) to iterate through s)
@@ -46,6 +47,7 @@ class Solution {
         }
         
         int ans = -1;
+        
         
         for(int i = 0; i < s.length(); i++)
         {
