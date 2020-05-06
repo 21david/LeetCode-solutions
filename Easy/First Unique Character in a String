@@ -1,0 +1,61 @@
+/*
+https://leetcode.com/explore/featured/card/may-leetcoding-challenge/534/week-1-may-1st-may-7th/3320/
+
+May Leetcoding challenge, day 5
+*/
+
+class Solution {
+    
+    public int firstUniqChar(String s) {
+        // 5 ms, faster than 94.54%
+        // runtime: O(N)
+        
+        // make an array to serve as a multiset and fill it (O(N) to iterate through s)
+        // iterate through s again and return the first letter that has a value of 1 in the multiset (O(N) again)
+        
+        int[] alphabet = new int[26];
+        
+        for(char c : s.toCharArray())
+            alphabet[c-'a']++;
+        
+        int i = 0;
+        for(char c : s.toCharArray())
+        {
+            if(alphabet[c-'a'] == 1)
+                return i;
+            i++;
+        }
+        
+        return -1;
+    }
+    
+    
+    public int firstUniqChar2(String s) {
+        // 27 ms, faster than 46.52%
+        // 42 mb, less than 5.71%
+        // runtime: O(N)
+        
+        HashMap<Character, Integer> map = new HashMap<>();
+        
+        for(char c : s.toCharArray())
+        {
+            if(map.containsKey(c))
+                map.put(c, map.get(c) + 1);
+            else
+                map.put(c, 1);
+        }
+        
+        int ans = -1;
+        
+        for(int i = 0; i < s.length(); i++)
+        {
+            if(map.get(s.charAt(i)) == 1)
+            {
+                ans = i;
+                break;
+            }
+        }
+        
+        return ans;
+    }
+}
