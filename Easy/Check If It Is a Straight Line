@@ -6,6 +6,9 @@ May Leetcoding challenge, day 8
 
 class Solution {
     public boolean checkStraightLine(int[][] coordinates) {
+        // 0 ms, faster than 100%
+        // 39.3 mb, less than 100%
+        
         /*
         1. Sort by x coordinate (if not already sorted)
         2. check slope between coordinates[0] and coordinates[1]
@@ -17,17 +20,13 @@ class Solution {
         double startingSlope = getSlope(coordinates[0], coordinates[1]);
         double slope;
         
-        System.out.println("start" + startingSlope);
-        
         boolean startingSlopeBroken = false;
         
         int i = 1;
         
         while(!startingSlopeBroken && i < coordinates.length - 1)
         {
-            System.out.println(i);
             slope = getSlope(coordinates[i], coordinates[i+1]);
-            System.out.println(slope);
             
             if(slope != startingSlope)
                 startingSlopeBroken = true;
@@ -47,6 +46,5 @@ class Solution {
             ans = Double.POSITIVE_INFINITY;
         
         return ans;
-        
     }
 }
