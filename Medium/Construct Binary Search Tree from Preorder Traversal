@@ -56,4 +56,33 @@ class Solution {
           }
         }
       }
+      
+      /* Another recursive version of 'addNumber()':
+      public void addToBST(TreeNode root, int num) {
+        
+        if(root.left == null && root.right == null) {
+            if(num < root.val)
+                root.left = new TreeNode(num);
+            else
+                root.right = new TreeNode(num);
+            
+            return;
+        }
+        
+        
+        if(num < root.val) {
+            if(root.left == null)
+                root.left = new TreeNode(num);
+            else
+                addToBST(root.left, num);
+        }
+        else {
+            if(root.right == null)
+                root.right = new TreeNode(num);
+            else
+                addToBST(root.right, num);
+        }
+
+    }
+    */
 }
