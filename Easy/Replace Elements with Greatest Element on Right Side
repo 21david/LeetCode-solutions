@@ -2,6 +2,9 @@
 
 class Solution {
     public int[] replaceElements(int[] arr) {
+        // 1 ms, faster than 99.76%
+        // 40.5 mb, less than 33.8%
+        
         // time complexity: O(N)
         // space complexity: O(1)
         
