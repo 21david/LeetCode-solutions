@@ -1,0 +1,19 @@
+//  https://leetcode.com/problems/replace-elements-with-greatest-element-on-right-side/
+
+class Solution {
+    public int[] replaceElements(int[] arr) {
+        // time complexity: O(N)
+        // space complexity: O(1)
+        
+        int curMax1 = -1;
+        int curMax2 = -1;
+        
+        for(int i = arr.length - 1; i >= 0; i--) {
+            curMax1 = Math.max(curMax1, arr[i]);
+            arr[i] = curMax2;
+            curMax2 = curMax1;
+        }
+        
+        return arr;
+    }
+}
