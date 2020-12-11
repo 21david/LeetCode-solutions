@@ -1,0 +1,22 @@
+//  https://leetcode.com/problems/find-all-duplicates-in-an-array/submissions/
+
+class Solution {
+    public List<Integer> findDuplicates(int[] nums) {
+        // 4 ms, faster than 97.92%
+        // 48 mb, less than 56.69%
+        
+        // O(N) runtime complexity
+        // O(N) space complexity
+        
+        ArrayList<Integer> dups = new ArrayList<>();
+        int[] multiset = new int[nums.length];
+        
+        for(int i = 0; i < nums.length; i++) {
+            multiset[ nums[i] - 1 ]++;
+            if(multiset[ nums[i] - 1 ] == 2)  // found a duplicate
+                dups.add(nums[i]);
+        }
+        
+        return dups;
+    }
+}
