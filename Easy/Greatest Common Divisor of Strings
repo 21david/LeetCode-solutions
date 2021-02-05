@@ -1,0 +1,82 @@
+//  https://leetcode.com/problems/greatest-common-divisor-of-strings/
+
+class Solution {
+    public String gcdOfStrings(String str1, String str2) {
+        // passes 69/114 test cases
+        
+        /* 
+        Add the two strings together
+        Start with a substring of length 1 (the first character), and check to see if
+        this substring repeats for the entire string. If it doesn't, 
+        try a substring of length 2 (the first two characters), and see if it repeats.
+        Repeat this until either a substring that repeats itself is found, or until a substring of greater than half the length of the string is reached (at this point, it can't be found).
+        If no solution is found, return an empty substring.
+        */
+        
+        StringBuffer longString = new StringBuffer(str1 + str2);
+        StringBuffer substring = new StringBuffer();
+        int i = 1; // length of substring
+        
+        outer:
+        for(i = 1; i <= longString.length() / 2; i++) {
+            // get a substring of length i and check if it repeats itself for the entire string
+            substring = new StringBuffer(longString.substring(0, i));
+            
+            for(int j = 0; j < longString.length(); j += substring.length()) {
+                if(j + i > longString.length() || !longString.substring(j, j + i).equals(substring.toString()))
+                    continue outer;  // try a bigger substring
+            }
+            
+            // if the above for loop reaches the end of the string, then we found
+            // a substring
+            
+            break outer;
+        }
+        
+        if(i == longString.length() / 2 + 1)
+            return "";
+        
+        // if the substring is not the largest string it can be, we can make it be
+        // (this code basically converts a common divisor into the greatest common divisor if it's not already)
+        
+        int gcd = gcdByEuclidsAlgorithm(str1.length(), str2.length());
+        
+        if(gcd > substring.length() && gcd % substring.length() == 0)
+        {
+            int divisor = gcd / substring.length();
+            
+            for(int a = 1; a < divisor; a++) {
+                substring = substring.append(substring);
+            }
+        }
+        
+        return substring.toString();
+    }
+    
+    public int gcdByEuclidsAlgorithm(int n1, int n2) {
+        if (n2 == 0)
+            return n1;
+        return gcdByEuclidsAlgorithm(n2, n1 % n2);
+    }
+}
+
+/*
+
+Test cases:
+
+"ABCABC"
+"ABC"
+"ABABAB"
+"ABAB"
+"LEET"
+"CODE"
+"ABCDEF"
+"ABC"
+"ABCABCABCABCABCABC"
+"ABCABC"
+"AAAAAAAAA"
+"AAACCC"
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+
+*/
