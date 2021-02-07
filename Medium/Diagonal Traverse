@@ -2,11 +2,15 @@
 
 class Solution {
     
+    int[] answer;
+    int a = 0;
+    
     int row = 0, col = 0;
     int count = 0;
     
     public int[] findDiagonalOrder(int[][] matrix) {
-        // 4 ms, faster than about 37%
+        // 2 ms, faster than 90.72%
+        // 41.2 mb, less than 39.69%
         
         /*
         Inspired by solution #2 on LeetCode. 
@@ -20,22 +24,23 @@ class Solution {
         if(matrix.length == 0 || matrix[0].length == 0)
             return new int[0];
         
-        ArrayList<Integer> result = new ArrayList<>();
-        
         int numOfElements = matrix.length * matrix[0].length;
         
-        int rowOrCol = 0;
+        // initialize final array that stores answer
+        answer = new int[numOfElements];
+        
+        int diagonal = 0; // used to switch diagonal directions
         
         while(count < numOfElements) {
             
-            if(rowOrCol % 2 == 0)  // upwards diagonal
-                upRight(result, matrix);
+            if(diagonal % 2 == 0)  // upwards diagonal
+                upRight(matrix);
             else  // downwards diagonal
-                downLeft(result, matrix);
+                downLeft(matrix);
             
             // after the diagonal's traverse, find the next head
             
-            if(rowOrCol % 2 == 0) { // if we traveled upwards
+            if(diagonal % 2 == 0) { // if we traveled upwards
                 // then the next head will either be to the right, or below
                 if(!outOfBounds(matrix, row, col + 1)) // check spot to the right
                     col++; // go to the right
@@ -50,21 +55,14 @@ class Solution {
                     col++; // go to the right
             }
             
-            rowOrCol++;
-            
+            diagonal++;
         }
-        
-        int[] answer = new int[matrix.length * matrix[0].length];
-        
-        int a = 0;
-        for(int i : result)
-            answer[a++] = i;
         
         return answer;
     }
     
     // starting at matrix[row][col], traverse it in a diagonal going up-right, and add the elements to result
-    public void upRight(ArrayList<Integer> result, int[][] matrix) {
+    public void upRight(int[][] matrix) {
         if(outOfBounds(matrix, row, col)) // then we reached the tail
         {
             // move it back from an out of bounds position
@@ -75,17 +73,17 @@ class Solution {
         }
         
         count++;
-        result.add(matrix[row][col]);
+        answer[a++] = matrix[row][col];
         
         // move current position up-right
         row--;
         col++;
         
-        upRight(result, matrix);
+        upRight(matrix);
     }
     
     // starting at matrix[row][col], traverse it in a diagonal going down-left, and add the elements to result
-    public void downLeft(ArrayList<Integer> result, int[][] matrix) {
+    public void downLeft(int[][] matrix) {
         if(outOfBounds(matrix, row, col))
         {
             // move it back from an out of bounds position
@@ -96,13 +94,13 @@ class Solution {
         }
         
         count++;
-        result.add(matrix[row][col]);
+        answer[a++] = matrix[row][col];
         
         // move current position up-right
         row++;
         col--;
         
-        downLeft(result, matrix);
+        downLeft(matrix);
     }
     
     public boolean outOfBounds(int[][] matrix, int r, int c) {
