@@ -1,0 +1,80 @@
+//  https://leetcode.com/problems/diagonal-traverse/
+
+class Solution {
+    public int[] findDiagonalOrder(int[][] matrix) {
+        // this solution works for square matrices only
+        
+        // keep a counter variable to keep track of the starting point
+        // of each diagonal. the starting point will alternate between
+        // the top row and the left column.
+        
+        
+        if(matrix.length == 0)
+            return new int[0];
+        
+        int start = 0;
+        int rowOrCol = 0;
+        
+        int leftColumn = 0, topRow = 0;
+        int bottomRow = matrix.length - 1, rightColumn = matrix.length - 1;
+        
+        ArrayList<Integer> result = new ArrayList<>();
+        
+        for(start = 0; start < matrix.length; start++) {
+            if(rowOrCol % 2 == 0)  // starting from left column
+                upRight(result, matrix, start, leftColumn);
+            else
+                downLeft(result, matrix, topRow, start);
+            
+            rowOrCol++;
+        }
+        
+        
+        
+        // from here, we will either start from the bottom row or
+        // from the right column
+        
+        
+        for(start = 1; start < matrix.length; start++) {
+            if(rowOrCol % 2 == 0)  // starting from left column
+                upRight(result, matrix, bottomRow, start);
+            else
+                downLeft(result, matrix, start, rightColumn);
+            
+            rowOrCol++;
+        }
+        
+        
+  //      System.out.println(result);
+        
+        int[] answer = new int[matrix.length * matrix[0].length];
+        
+        int a = 0;
+        for(int i : result)
+            answer[a++] = i;
+        
+        return answer;
+    }
+    
+    // starting at matrix[row][col], traverse it in a diagonal going up-right, and add the elements to result
+    public void upRight(ArrayList<Integer> result, int[][] matrix, int row, int col) {
+        if(outOfBounds(matrix, row, col))
+            return;
+        
+        result.add(matrix[row][col]);
+        upRight(result, matrix, row - 1, col + 1);
+    }
+    
+    // starting at matrix[row][col], traverse it in a diagonal going down-left, and add the elements to result
+    public void downLeft(ArrayList<Integer> result, int[][] matrix, int row, int col) {
+        if(outOfBounds(matrix, row, col))
+            return;
+        
+        result.add(matrix[row][col]);
+        downLeft(result, matrix, row + 1, col - 1);
+    }
+    
+    public boolean outOfBounds(int[][] matrix, int r, int c) {
+        return r < 0 || c < 0 || r >= matrix.length || c >= matrix[0].length;
+    }
+}
