@@ -1,71 +1,69 @@
-// Time limit exceeded (passes 314/315)
+//  https://leetcode.com/problems/trapping-rain-water/
 
 class Solution {
     public int trap(int[] height) {
+        // 1 ms, faster than 83.80%
+        // 38.9 mb, less than 20.43%
+        // Solved in 18 minutes (watched a solution video)
         
-        if(height.length == 0)
+        /*
+        
+        I think if we have an array that stores the highest elevation to 
+        the right of every index, and another array that stores the
+        highest elevation to the left of every index, we can use the 
+        three arrays to compute how much water is in each index.
+        All of these iterations would be O(N).
+        
+        */
+        
+        if(height.length <= 2)
             return 0;
         
-        // find the maximum to know the height of the blocks
+        int[] maxOnLeft = new int[height.length];
+        int[] maxOnRight = new int[height.length];
+        
+        // Fill up the maxOnLeft array by starting from the left
+        // and keeping track of the maximum elevation
         int max = height[0];
-        for(int i = 1; i < height.length; i++)
-        {
-            if(height[i] > max)
-                max = height[i];
+        for(int i = 1; i < height.length; i++) {
+            maxOnLeft[i] = max;  // assign it the highest elevetion we have found so far
+            
+            // update the maximum is there is a new maximum
+            max = Math.max(max, height[i]);
         }
         
         
-      //  System.out.println(Arrays.deepToString(map).replace("],","\n"));
-        
-        int count = 0;
-        
-        // iterate through array for each row
-        for(int r = 1; r <= max; r++)
-        {
-            // for the first row, check to the left and to the right
-            // looking for a 1 or greater
-            for(int c = 1; c < height.length - 1; c++)
-            {
-               if(height[c] < r && canHoldWater(height, r, c))
-                   count++;
-            }
+        // Fill up the maxOnRight array similarly, starting from the right
+        max = height[height.length - 1];
+        for(int i = height.length - 2; i >= 0; i--) {
+            maxOnRight[i] = max;
+            
+            max = Math.max(max, height[i]);
         }
         
-        return count;
-    }
-    
-    public boolean canHoldWater(int[] height, int targetHeight, int c)
-    {
-      //  System.out.println(r + " " + c);
+        // At eaxh index i, the amount of rain is 
+        // min(maxOnLeft[i], maxOnRight[i]) - height[i]
+        // but if it is a negative number, then it is 0.
+        int countRain = 0;
+        int computation;
         
-        boolean boxToTheRight = false;
-        boolean boxToTheLeft = false;
-        
-        int c2 = c;
-        
-        // look to the right
-        for(; c2 < height.length; c2++)
-        {
-           // System.out.println("Loop: " + map[r][c2] + ", " + r  + ", " + c2);
-            if(height[c2] >= targetHeight)
-            {
-                boxToTheRight = true;
-                break;
-            }
+        for(int i = 0; i < height.length; i++) {
+            computation = Math.min(maxOnLeft[i], maxOnRight[i]) - height[i];
+            if(computation > 0)
+                countRain += computation;
+            else
+                continue;
         }
         
-        // look to the left
-        for(; c >= 0; c--)
-        {
-            if(height[c] >= targetHeight)
-            {
-                boxToTheLeft = true;
-                break;
-            }
-        }
-        
-      //  System.out.println(boxToTheLeft + " " + boxToTheRight);
-        
-        return boxToTheRight && boxToTheLeft;
+        return countRain;
     }
 }
+
+/*
+Sample input:
+[]
+[20]
+[12,20]
+[0,1,0,2,1,0,1,3,2,1,2,1]
+
+*/
