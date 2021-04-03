@@ -2,6 +2,10 @@
 
 class Solution {
     public int longestValidParentheses(String s) {
+        // 2 ms, faster than 68.47%
+        // 38.9 mb, less tan 56.64%
+        // Solved in ~30 minutes
+        
         /*
         We can use the normal algorithm that checks whether a string of parenthesis is 
         valid, but with a few changes. We can make a boolean array the same size of the
@@ -20,7 +24,7 @@ class Solution {
         boolean[] validOrNot = new boolean[s.length()];
         Arrays.fill(validOrNot, false);
         
-        Stack<Character> parenthesis = new Stack<>();
+        int parenthesis = 0;
         Stack<Integer> indices = new Stack<>();
         
         char curChar;
@@ -29,15 +33,15 @@ class Solution {
             curChar = s.charAt(i);
             
             if(curChar == '(') {
-                parenthesis.push('(');
+                parenthesis++;
                 indices.push(i);
             }
             else {
-                if(parenthesis.isEmpty())
+                if(parenthesis == 0)
                     continue;
                 
                 // if it's not empty, and there is a matching '(', then
-                parenthesis.pop();
+                parenthesis--;
                 index = indices.pop();
                 
                 // now we have the indices of two matching parenthesis
