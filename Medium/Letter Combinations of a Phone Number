@@ -2,9 +2,9 @@
 
 class Solution {
     public List<String> letterCombinations(String digits) {
-        // 5 ms, faster than 26.23%
-        // 38.8 mb, less than 55.86%
-        // Solved in about 46 minutes
+        // 1 ms, faster than 72%
+        // 37.6 mb, less than 81.18%
+        // Solved in about 46+ minutes
         
         /*
         for each letter that each digit represents, we have to pair it with all the letters
@@ -57,18 +57,18 @@ class Solution {
         for(char c : digits.toCharArray())
             letters.add(map.get(c - 48));
         
-        recursive("", letters);
+        recursive(new StringBuilder(), letters);
         
         return solution;
     }
     
     private List<String> solution = new ArrayList<>();
     
-    public void recursive(String a, List<String> b) {
+    public void recursive(StringBuilder a, List<String> b) {
         
         // once the list is empty, then we have a valid letter combination in a
         if(b.isEmpty()) {
-            solution.add(a);
+            solution.add(a.toString());
             return;
         }
         
@@ -76,10 +76,12 @@ class Solution {
         String first = b.get(0);
         
         // so for each letter, we add it to a the string that will represent a letter combination
+        StringBuilder aNew;
         for(char c : first.toCharArray()) {
             
             b.remove(0);
-            recursive(a + c, b);
+            aNew = new StringBuilder(a);
+            recursive(aNew.append(c), b);
             b.add(0, first);
         }
     }
