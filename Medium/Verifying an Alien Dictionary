@@ -1,11 +1,12 @@
 //  https://leetcode.com/problems/verifying-an-alien-dictionary/
 
 class Solution {
-    HashMap<Character, Integer> letterPositions = new HashMap<>();
+    int[] letterPositions = new int[26];
     
     public boolean isAlienSorted(String[] words, String order) {
-        // 1 ms, faster than 44.84%
-        // 38.8 mb, less than 34.96%
+        // 0 ms, faster than 100%
+        // 37.4 mb, less than 84.08%
+        // Solved in about 35 minutes
         
         /*
         We can go through the list of words, comparing each word with the next word, until we
@@ -26,7 +27,7 @@ class Solution {
         // fill up the hashmap with the letters and their positions
         int pos = 1;
         for(char c : order.toCharArray())
-            letterPositions.put(c, pos++);
+            letterPositions[c-97] =  pos++;
             
         for(int i = 0; i < words.length - 1; i++) {
             if(!isSorted(words[i], words[i+1]))
@@ -41,16 +42,16 @@ class Solution {
         
         int len = Math.min(a.length(), b.length());
         
-        char curCharA;
-        char curCharB;
+        int curCharA;
+        int curCharB;
         
         for(int i = 0; i < len; i++) {
-            curCharA = a.charAt(i);
-            curCharB = b.charAt(i);
+            curCharA = a.charAt(i) - 97;
+            curCharB = b.charAt(i) - 97;
             
-            if(letterPositions.get(curCharA) == letterPositions.get(curCharB))
+            if(letterPositions[curCharA] == letterPositions[curCharB])
                 continue;
-            else if(letterPositions.get(curCharA) > letterPositions.get(curCharB))
+            else if(letterPositions[curCharA] > letterPositions[curCharB])
                 return false;
             else
                 return true;
@@ -67,3 +68,18 @@ class Solution {
             return false;
     }
 }
+
+/*
+Sample input:
+["hello","leetcode"]
+"hlabcdefgijkmnopqrstuvwxyz"
+["qwer", "qwert", "qwerty", "qert", "qerty", "moon", "moonbase"]
+"qwertyuiopasdfghjklzxcvbnm"
+["hello","leetcode"]
+"hlabcdefgijkmnopqrstuvwxyz"
+["qwerty", "qwert", "qwer", "moonbase", "moon"]
+"qwertyuiopasdfghjklzxcvbnm"
+
+
+
+*/
