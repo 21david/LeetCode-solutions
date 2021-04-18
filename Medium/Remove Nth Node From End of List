@@ -1,0 +1,66 @@
+//  https://leetcode.com/problems/remove-nth-node-from-end-of-list/
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        // 1 ms, faster than 9.27%
+        // 38.7 mb, less than 5.05%
+        // Solved in 16 minutes 30 seconds
+        
+        /*
+        Doing this in 2 passes would be easy. We can iterate once to find out the 
+        length of the array, then iterate again until node (length - n - 1), remove
+        the unwanted node and replace it with the node that follows, then return
+        the head of this linked list.
+        Time complexity: O(N)
+        Space complexity: O(1)
+        
+        Another approach is to have two pointers, one travels half as fast as the other
+        one. When the second one reaches the end, if n > length/2, we can start from
+        the first pointer, iterate to the previous node of the one we want to remove, 
+        and remove it. If n <= length/2, we can just start from the beginning.
+        Time complexity: O(N)
+        Space complexity: O(1)
+        
+        Another approach would be to make a hashset that contains the number
+        of the node as the key and the node itself as the value. Then, we can 
+        quickly get to the node before the one we want to remove, remove it,
+        then return the head.
+        Time complexity: O(N)
+        Space complexity: O(N)
+        */
+        if(head == null)
+            return null;
+        
+        
+        HashMap<Integer, ListNode> map = new HashMap<>();
+        int count = 1;
+        map.put(count++, head);
+        
+        ListNode temp = head.next;
+        
+        while(temp != null) {
+            map.put(count++, temp);
+            temp = temp.next;
+        }
+        
+        // remove the node
+        if(n == map.size())
+            return head.next;
+        
+        ListNode temp2 = map.get(map.size() - n);
+        temp2.next = temp2.next.next;
+        
+        return head;
+        
+    }
+}
