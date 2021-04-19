@@ -12,55 +12,63 @@
  */
 class Solution {
     public ListNode removeNthFromEnd(ListNode head, int n) {
-        // 1 ms, faster than 9.27%
-        // 38.7 mb, less than 5.05%
-        // Solved in 16 minutes 30 seconds
+        // 0 ms, faster than 100%
+        // 36.8 mb, less than 65.70%
+        // Solved in about 30+ minutes
         
         /*
-        Doing this in 2 passes would be easy. We can iterate once to find out the 
-        length of the array, then iterate again until node (length - n - 1), remove
-        the unwanted node and replace it with the node that follows, then return
-        the head of this linked list.
-        Time complexity: O(N)
-        Space complexity: O(1)
-        
-        Another approach is to have two pointers, one travels half as fast as the other
-        one. When the second one reaches the end, if n > length/2, we can start from
-        the first pointer, iterate to the previous node of the one we want to remove, 
-        and remove it. If n <= length/2, we can just start from the beginning.
-        Time complexity: O(N)
-        Space complexity: O(1)
-        
-        Another approach would be to make a hashset that contains the number
-        of the node as the key and the node itself as the value. Then, we can 
-        quickly get to the node before the one we want to remove, remove it,
-        then return the head.
-        Time complexity: O(N)
-        Space complexity: O(N)
+        Approach after seeing optimal solution: 
+        We can iterate to the (n+1)th node using a pointer, then, we can
+        set another pointer to the beginning and iterate both
+        pointers at the same speed until the second pointer
+        reaches the null at the end. They will have a gap of
+        n+1 in between, and this gap will put our leftmost pointer
+        on the node right before the one we want to remove.
+        Then, we just remove the node and return the head.
+        Time complexity: O(N) (one pass through the linked list)
+        Space complexity: O(1), no extra memory is used except pointers
         */
-        if(head == null)
+        if(head == null || head.next == null)
             return null;
         
-        
-        HashMap<Integer, ListNode> map = new HashMap<>();
-        int count = 1;
-        map.put(count++, head);
-        
-        ListNode temp = head.next;
-        
-        while(temp != null) {
-            map.put(count++, temp);
-            temp = temp.next;
+        // iterate a pointer n+1 nodes
+        ListNode pointer2 = head;
+        while(n >= 0) {
+            if(pointer2 == null)
+                return head.next;
+            pointer2 = pointer2.next;
+            n--;
         }
         
-        // remove the node
-        if(n == map.size())
-            return head.next;
+        // iterate that pointer until it reaches the end
+        // and iterate another pointer starting from the beginning
+        // this will put pointer1 right behind the node we want to remove
+        ListNode pointer1 = head;
+        while(pointer2 != null) {
+            pointer1 = pointer1.next;
+            pointer2 = pointer2.next;
+        }
         
-        ListNode temp2 = map.get(map.size() - n);
-        temp2.next = temp2.next.next;
+        // remove the unwanted node
+        pointer1.next = pointer1.next.next;
         
         return head;
-        
     }
 }
+
+/*
+Sample input:
+[1,2,3,4,5]
+2
+[2,4,6,8,10]
+1
+[2,4,6,8,10]
+3
+[2,4,6,8,10]
+4
+[2,4,6,8,10]
+5
+[1]
+1
+
+*/
