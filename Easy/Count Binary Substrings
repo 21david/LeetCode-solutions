@@ -1,0 +1,85 @@
+//  https://leetcode.com/problems/count-binary-substrings/
+
+class Solution {
+    public int countBinarySubstrings(String s) {
+        // 19 ms, faster than 5.58%
+        // 40 mb, less than 7.16%
+        // Solved in 32 minutes 30 seconds
+        
+        /*
+        A brute force approach would be to check all substrings of size 2, then size 3,
+        until the subtring reaches the size of the whole string. I think this would be
+        O(N^2) complexity, which would probably not pass the time limit.
+        
+        Another approach would be to check all substrings of size 2, and when a substring
+        that matches the pattern is found, store the index of that substring somewhere.
+        Once the whole string is iterated through, we should have a list of all the size 2
+        substrings that match, and any other substrings that match will start from these.
+        So, for each substring of size 2, we can try to expand as much as we can, counting any
+        new substrings that we find. Once we've tried all the substrings, we should have
+        a count of all the substrings (of all sizes) that match the pattern in the description.
+        
+        */
+        
+        ArrayList<Integer> indices = new ArrayList<>();
+        
+        // iterate through string, finding substrings of size 2 that look like "01" or "10"
+        for(int i = 0; i < s.length() - 1; i++) {
+            if((s.charAt(i) == '0' && s.charAt(i+1) == '1') || (s.charAt(i) == '1' && s.charAt(i+1) == '0'))
+                indices.add(i);
+        }
+        
+        
+        // any substring that we already found will count towards the solution
+        int count = indices.size();
+        
+        
+        // now we have to try to expand from the ones we found to find bigger ones
+        int rightIndex;
+        char leftNum, rightNum;
+        for(int leftIndex : indices) {
+            rightIndex = leftIndex+1;
+            
+            leftNum = s.charAt(leftIndex); // either a 1 or a 0
+            rightNum = s.charAt(rightIndex); // opposite number from leftNum
+            
+            // try to expand
+            leftIndex--;
+            rightIndex++;
+
+            // while both pointers are still within bound
+            while(leftIndex >= 0 && rightIndex < s.length()) {
+                
+                if(s.charAt(leftIndex) == leftNum && s.charAt(rightIndex) == rightNum)  // if still a match
+                    count++;
+                else
+                    break;
+                
+                // try to expand
+                leftIndex--;
+                rightIndex++;
+            }
+        }
+        
+        return count;
+    }
+}
+
+/*
+Sample input:
+"01"
+"10"
+"0101"
+"1010"
+"01010"
+"010101"
+"0101010"
+"01010101"
+"010101010101010101010101"
+"101010101010101010101010"
+"00110"
+"00110011"
+"0000001111110011"
+"00001111001100000000001111111111111000111000"
+
+*/
