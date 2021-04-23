@@ -1,7 +1,65 @@
 //  https://leetcode.com/problems/count-binary-substrings/
 
 class Solution {
+    
     public int countBinarySubstrings(String s) {
+        // 10 ms, faster than 20.55%
+        // 39.6 mb, less than 12.32%
+        
+        /*
+        Inspired by the solution:
+        Turn the input string into an array of ints, where each int
+        in the array represents the length of a substring of consecutive 1s or 0s.
+        So "000110000001111111111" would become [3, 2, 6, 10]
+        After this, for every pair of adjacent ints in the array, we can
+        determine how many substrings we can count. For example, 
+        with 3 and 2, we know it will be "11100" or "00111", and in both
+        cases, we can form 2 substrings (which is min(3, 2)). So for all pairs,
+        we add min(arr[i], arr[i+1]) to a counter variable, and return
+        the value of that variable at the end.    
+        */
+        
+        ArrayList<Integer> array = new ArrayList<>();
+        
+        char num = s.charAt(0);
+        int size = 1;
+        char temp;
+        
+        loop:
+        for(int i = 1; i <= s.length(); i++) {
+            size = 1;
+            
+            if(i >= s.length()) {
+                array.add(size);
+                break loop;
+            }
+            
+            temp = s.charAt(i);
+            while(temp == num) {
+                size++;
+                i++;
+                
+                if(i >= s.length()) {
+                    array.add(size);
+                    break loop;
+                }
+                temp = s.charAt(i);
+            }
+            num = temp;  // at this point, it switches digits (0 to 1, or 1 to 0)
+            array.add(size);
+        }
+        
+        int count = 0;
+        
+        for(int i = 0; i < array.size() - 1; i++) {
+            count += Math.min(array.get(i), array.get(i+1));    
+        }
+        
+        return count;
+    }
+    
+    
+    public int countBinarySubstrings2(String s) {
         // 19 ms, faster than 5.58%
         // 40 mb, less than 7.16%
         // Solved in 32 minutes 30 seconds
