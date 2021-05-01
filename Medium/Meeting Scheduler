@@ -6,6 +6,8 @@ class Solution {
         // 48.3 mb, less than 51.77%
         // Solved in 28 minutes 
         
+        // This approach and runtime could be drastically improved
+        
         // sorts slots1 and slots2 by the first element of each inner array
         Arrays.sort(slots1, (x, y) -> x[0] - y[0]);
         Arrays.sort(slots2, (x, y) -> x[0] - y[0]);
