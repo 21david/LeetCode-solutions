@@ -12,9 +12,6 @@ class Solution(object):
         :type root: TreeNode
         :rtype: int
         """
-        return find_depth(root, 0)
-
-def find_depth(tree, depth):
-    if tree == None:
-        return depth
-    return max(find_depth(tree.left, depth+1), find_depth(tree.right, depth+1))
+        if root == None:
+            return 0
+        return max(self.maxDepth(root.left), self.maxDepth(root.right)) + 1
