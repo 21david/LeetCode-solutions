@@ -14,13 +14,14 @@ class Solution(object):
         optionally that there are no cycles. If we look out for cycles,
         we can optimize the algorithm to stop as soon as it finds a cycle.
 
-        The time complexity is O(N + M). Setting up the empty adjacency list
-        is O(N). Filling in the adjacency list is O(M). This is O(N + M) so far.
+        The time complexity is O(N). Since we first check that the number of edges
+        is one less than the number of nodes, then E ≈ N, which reduces O(N + M) to O(N).
+        Setting up the empty adjacency list is O(N). Filling in the adjacency list is O(N). 
         The DFS visits each node at most once, and looks through each of it's
-        neighbors, so this is also O(N + M). 
+        neighbors, so this is also O(N). 
 
-        The auxiliary space complexity is O(N + M) also, because the adjacency list
-        creates n lists and fills it in with all m edges. (Each edge being added
+        The auxiliary space complexity is O(N) also, because the adjacency list
+        creates N lists and fills it in with all N - 1 edges. (Each edge being added
         twice, once for each node in the edge.) The 'visited' set takes up O(N)
         space. The recursion stack can reach a height of N in the worst case, also
         taking up O(N) space.
