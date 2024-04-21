@@ -34,6 +34,4 @@ class Solution(object):
                 if neighbor not in visited:
                     stack.append(neighbor)
 
-            # print(stack)
-
         return False
