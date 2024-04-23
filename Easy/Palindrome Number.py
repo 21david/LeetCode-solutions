@@ -6,16 +6,14 @@ class Solution(object):
         :type x: int
         :rtype: bool
         """
-        if x < 0:
-            return False
-
         x_copy = x
-        reverse = x_copy % 10
-        x_copy /= 10
+        reverse = 0
 
-        while x_copy:
-            reverse *= 10
+        while x_copy > 0:
             reverse += x_copy % 10
             x_copy /= 10
+            reverse *= 10
+                    
+        reverse /= 10
 
         return reverse == x
