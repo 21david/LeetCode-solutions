@@ -1,5 +1,7 @@
 # https://leetcode.com/problems/binary-tree-inorder-traversal/
 
+# Solved in 5 minutes
+
 # Definition for a binary tree node.
 # class TreeNode(object):
 #     def __init__(self, val=0, left=None, right=None):
