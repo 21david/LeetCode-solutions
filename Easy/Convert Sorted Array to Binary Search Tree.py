@@ -1,4 +1,5 @@
 # https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/
+# Solved in 11 minutes
 
 # Definition for a binary tree node.
 # class TreeNode(object):
