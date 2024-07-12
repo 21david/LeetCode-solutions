@@ -76,3 +76,48 @@ class Solution(object):
                 return max_length - 1
         else:
             return max_length
+
+
+    """
+    Another solution with the same basic approach, but using different variables
+    and logic. Also O(N) space complexity and O(1) time complexity.
+    """
+    def longestSubarray_2(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        """
+        """
+
+        index_of_last_zero = -1
+        index_of_second_last_zero = -1
+        current_length = 0
+        max_length = 0
+        removed_zero = False
+
+        for i in range(0, len(nums)):
+            if nums[i]:
+                current_length += 1
+                max_length = max(max_length, current_length)
+            else:
+                if not nums[i-1]:
+                    removed_zero = False
+                    current_length = 0
+                elif not removed_zero and current_length >= 1:
+                    removed_zero = True
+                elif removed_zero and current_length >= 1:
+                    # If a 0 had already been found AND it was counted as a removed 0
+                    # slide window to the right to the next 0
+                    if index_of_second_last_zero:
+                        num_of_old_ones = index_of_last_zero - index_of_second_last_zero - 1
+                    else:
+                        num_of_old_ones = index_of_last_zero
+                    current_length -= num_of_old_ones
+                index_of_second_last_zero = index_of_last_zero
+                index_of_last_zero = i
+                
+        if index_of_last_zero == -1:
+            return max_length - 1
+        else:
+            return max_length
