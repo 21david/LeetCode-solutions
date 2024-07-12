@@ -118,3 +118,38 @@ class Solution(object):
             return max_length - 1
         else:
             return max_length
+
+
+    """
+    Another solution with the same basic approach. This solution is less optimal
+    because sliding the window is O(N) instead of O(1). However, the overall time
+    complexity is still O(N) and the space complexity is still O(1).
+    """
+    def longestSubarray_3(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        num_of_zeros = 0
+        max_length = 0
+        l = 0
+
+        for r in range(0, len(nums)):
+            if nums[r]:
+                max_length = max(max_length, r - l) + (1 - num_of_zeros)
+            else:
+                num_of_zeros += 1
+
+                # Slide window to the right if we are at 2 zeros
+                if num_of_zeros == 2:
+                    while nums[l]:
+                        l += 1
+                    l += 1
+                    num_of_zeros = 1
+        
+        if num_of_zeros:
+            return max_length
+        else:
+            return max_length - 1
+                
+                
