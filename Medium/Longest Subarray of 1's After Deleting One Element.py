@@ -61,7 +61,6 @@ class Solution(object):
             else:
                 if index_of_last_zero < 0:
                     index_of_last_zero = i
-                    continue
                 else:
                     # If a 0 had already been found, slide window to the right
                     # from the previous 0 to the new 0
