@@ -151,5 +151,31 @@ class Solution(object):
             return max_length
         else:
             return max_length - 1
-                
+
+
+    """
+    Another solution like the one above, but written in a slightly shorter way.
+    Same time and space complexities.
+    """
+    def longestSubarray_4(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        max_length = 0
+        num_of_zeros = 0
+        l = 0
+
+        for r in range(len(nums)):
+            if not nums[r]:
+                num_of_zeros += 1
+
+            while num_of_zeros > 1:
+                if not nums[l]:
+                    num_of_zeros -= 1
+                l += 1
+            
+            max_length = max(max_length, r - l)
+        
+        return max_length
                 
