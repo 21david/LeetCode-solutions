@@ -87,9 +87,6 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        """
-        """
-
         index_of_last_zero = -1
         index_of_second_last_zero = -1
         current_length = 0
