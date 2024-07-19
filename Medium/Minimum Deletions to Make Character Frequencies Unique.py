@@ -60,7 +60,6 @@ class Solution(object):
         for c, f in freqs.items():
             freqs_arr[f].append(c)
 
-        print(freqs_arr)
         # 3.
         total = 0
         for i in range(len(s), 0, -1):
