@@ -14,7 +14,7 @@ class Solution(object):
     O(N) for iterating through the string and building the dictionary
     O(N) for iterating through the dictionary and building the 2D array
     O(N^2) for iterating through the 2D array and calculating the answer in the worst-
-    case type of input (if all letters are the same).
+    case type of input (if all letters have the same frequency and >= 2).
     The total worst-case time complexity is O(N^2).
 
     Space complexity:
