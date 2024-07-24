@@ -9,8 +9,13 @@ This is basically a brute force approach, which is necessary because we can't kn
 without trying. For each attempt, once we reach the end of the string and have an expression, we evaluate it, and if it evaluates 
 to the target, we keep the expression in an array that is returned at the end. Then, we filter out the solutions that have a
 number with a leading 0.
-
-This attempt exceeds the time limit on LeetCode because of the functions to evaulate the expression at the end.
+Time complexity: O(4^N * N) because each recursive call makes 4 recursive calls, which creates a tree.
+At the base cases (about 4^(N-1) of these), O(N) work is performed to evaluate the expression.
+Space complexity: O(4^N * N). In the worst case, nearly all 4^(N-1) attempted expressions will
+be a valid expression, and each expression will take space for anywhere between N and 2N-1 characters.
+The space complexity used for the stack is O(N).
+This attempt exceeds the time limit on LeetCode because of the functions to evaulate the expression at the end. See the next 
+solution for an approach that passes.
 """
 class Solution(object):
     def addOperators(self, num, target):
@@ -90,3 +95,130 @@ def eval_sum(exp):
         else:
             total_sum += int(str)
     return total_sum
+
+
+
+"""
+Solution 2:
+The same approach as above, but as we are building the expressions, we calculate the current value
+of it, instead of calculating each one at the end. We also check for and avoid leading 0s as we're
+building the expression.
+To evaluate the expression as we're going, we must do something different when multiplying than when
+adding or subtracting because of the priority of multiplication (PEMDAS). One way to do this is to 
+keep track of the previous operand (the last one that has been fully read). With that, if you need 
+that operand for a multiplication rather than a sum or subtraction, then you can undo it from the 
+current expression value (stored in a variable), use it for the multiplication, and then recalculate 
+the total. The exception to this is that when multiplying, it should accumulate the product of 
+multiple multiplications in a row for it to work.
+Time complexity: O(4^N) because each recursive call makes 4 recursive calls, which creates a tree.
+Each recursive call does a constant amount of work that doesn't depend on the length of the number
+string, including the base case
+Space complexity: O(4^N * N). In the worst case, nearly all 4^(N-1) attempted expressions will
+be a valid expression, and each expression will take space for anywhere between N and 2N-1 characters.
+The space complexity used for the stack is O(N).
+"""
+class Solution(object):
+    def addOperators(self, num, target):
+        """
+        :type num: str
+        :type target: int
+        :rtype: List[str]
+        """
+        ans = []
+        helper(
+            num,        # s
+            num[0],     # slate
+            0,          # curr_total
+            0,          # prev_num
+            num[0],     # curr_num
+            1,          # i
+            False,      # multiplying
+            target,     # target
+            ans         # ans
+        )
+
+        return ans
+
+# num - (string) the original number
+# slate - (string) temporary variable to store the expression as we build it
+# curr_total - (integer) current value of the expression so far
+# prev_num - (integer) the previous integer/operand that has been fully read
+# curr_num - (string) the current integer/operand that is being read
+# i - (integer) the index of the current letter we are considering
+# target - (integer) the target value
+# ans - (array of strings) array to store the final answers
+def helper(num, slate, curr_total, prev_num, curr_num, i, multiplying, target, ans):
+    if i == len(num): # reached the end of the string
+        # Calculate new total and compare with target
+        new_total = None
+        if multiplying:
+            new_total = (curr_total - prev_num) + (prev_num * int(curr_num))
+        else:
+            new_total = curr_total + int(curr_num)
+
+        if new_total == target:
+            ans.append(slate)
+
+        return
+    
+    # If our current number is a 0, we can't add more numbers because
+    # we can't have trailing 0s
+    if not (curr_num == '0' or curr_num == '-0'):
+        helper(
+            num,              
+            slate + num[i],     # slate
+            curr_total,         # curr_total
+            prev_num,           # prev_num
+            curr_num + num[i],  # curr_num
+            i+1,                # i
+            multiplying,        # operator
+            target,             
+            ans
+        )
+
+    # If we're not joining, then we're ending the number and starting a new number
+    # so the value of curr_total has to change
+    new_total = 0
+    new_prev_num = 0
+    if multiplying:
+        new_total = (curr_total - prev_num) + (prev_num * int(curr_num))
+        new_prev_num = prev_num * int(curr_num)
+    else:
+        new_total = curr_total + int(curr_num)
+        new_prev_num = int(curr_num)
+
+    helper(
+        num, 
+        slate + '+' + num[i],   # slate
+        new_total,              # curr_total
+        int(new_prev_num),      # prev_num 
+        num[i],                 # curr_num
+        i+1,                    # i
+        False,                  # multiplying
+        target, 
+        ans
+    )
+
+    helper(
+        num, 
+        slate + '*' + num[i],   # slate 
+        new_total,              # curr_total 
+        int(new_prev_num),      # prev_num
+        num[i],                 # curr_num
+        i+1,                    # i 
+        True,                   # multiplying
+        target, 
+        ans
+    )
+
+    helper(
+        num, 
+        slate + '-' + num[i],   # slate 
+        new_total,              # curr_total
+        int(new_prev_num),      # prev_num
+        '-' + num[i],           # curr_num 
+        i+1,                    # i
+        False,                  # multiplying
+        target, 
+        ans
+    )
