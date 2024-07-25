@@ -110,9 +110,10 @@ that operand for a multiplication rather than a sum or subtraction, then you can
 current expression value (stored in a variable), use it for the multiplication, and then recalculate 
 the total. The exception to this is that when multiplying, it should accumulate the product of 
 multiple multiplications in a row for it to work.
-Time complexity: O(4^N) because each recursive call makes 4 recursive calls, which creates a tree.
-Each recursive call does a constant amount of work that doesn't depend on the length of the number
-string, including the base case
+
+Time complexity: O(4^N * N) because each recursive call makes 4 recursive calls, which creates a tree.
+Each recursive call creates a new string, which is an O(N) operation because strings are immutable.
+
 Space complexity: O(4^N * N). In the worst case, nearly all 4^(N-1) attempted expressions will
 be a valid expression, and each expression will take space for anywhere between N and 2N-1 characters.
 The space complexity used for the stack is O(N).
