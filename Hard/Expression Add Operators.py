@@ -116,10 +116,7 @@ Each recursive call creates a new string, which is an O(N) operation because str
 
 Space complexity: O(4^N * N). In the worst case, nearly all 4^(N-1) attempted expressions will
 be a valid expression, and each expression will take space for anywhere between N and 2N-1 characters.
-The space complexity used for the stack is O(N).
-
-I think this solution could be further optimized adding characters to a list for each recursive call
-instead of creating a new string, then joining them using .join() if it becomes a valid expression.
+The space complexity used for the call stack is O(N).
 """
 class Solution(object):
     def addOperators(self, num, target):
@@ -131,7 +128,7 @@ class Solution(object):
         ans = []
         helper(
             num,        # s
-            num[0],     # slate
+            [num[0]],   # slate
             0,          # curr_total
             0,          # prev_num
             num[0],     # curr_num
@@ -144,7 +141,7 @@ class Solution(object):
         return ans
 
 # num - (string) the original number
-# slate - (string) temporary variable to store the expression as we build it
+# slate - (list of strings) temporary variable to store the expression as we build it
 # curr_total - (integer) current value of the expression so far
 # prev_num - (integer) the previous integer/operand that has been fully read
 # curr_num - (string) the current integer/operand that is being read
@@ -161,16 +158,17 @@ def helper(num, slate, curr_total, prev_num, curr_num, i, multiplying, target, a
             new_total = curr_total + int(curr_num)
 
         if new_total == target:
-            ans.append(slate)
+            ans.append(''.join(slate))
 
         return
     
     # If our current number is a 0, we can't add more numbers because
     # we can't have trailing 0s
     if not (curr_num == '0' or curr_num == '-0'):
+        slate.append(num[i])
         helper(
             num,              
-            slate + num[i],     # slate
+            slate,
             curr_total,         # curr_total
             prev_num,           # prev_num
             curr_num + num[i],  # curr_num
@@ -179,6 +177,7 @@ def helper(num, slate, curr_total, prev_num, curr_num, i, multiplying, target, a
             target,             
             ans
         )
+        slate.pop()
 
     # If we're not joining, then we're ending the number and starting a new number
     # so the value of curr_total has to change
@@ -191,9 +190,10 @@ def helper(num, slate, curr_total, prev_num, curr_num, i, multiplying, target, a
         new_total = curr_total + int(curr_num)
         new_prev_num = int(curr_num)
 
+    slate.extend(['+', num[i]])
     helper(
         num, 
-        slate + '+' + num[i],   # slate
+        slate,
         new_total,              # curr_total
         int(new_prev_num),      # prev_num 
         num[i],                 # curr_num
@@ -203,9 +203,10 @@ def helper(num, slate, curr_total, prev_num, curr_num, i, multiplying, target, a
         ans
     )
 
+    slate[-2] = '*'
     helper(
         num, 
-        slate + '*' + num[i],   # slate 
+        slate,
         new_total,              # curr_total 
         int(new_prev_num),      # prev_num
         num[i],                 # curr_num
@@ -215,9 +216,10 @@ def helper(num, slate, curr_total, prev_num, curr_num, i, multiplying, target, a
         ans
     )
 
+    slate[-2] = '-'
     helper(
         num, 
-        slate + '-' + num[i],   # slate 
+        slate,
         new_total,              # curr_total
         int(new_prev_num),      # prev_num
         '-' + num[i],           # curr_num 
@@ -226,3 +228,4 @@ def helper(num, slate, curr_total, prev_num, curr_num, i, multiplying, target, a
         target, 
         ans
     )
+    slate.pop(); slate.pop()
