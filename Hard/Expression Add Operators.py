@@ -117,6 +117,9 @@ Each recursive call creates a new string, which is an O(N) operation because str
 Space complexity: O(4^N * N). In the worst case, nearly all 4^(N-1) attempted expressions will
 be a valid expression, and each expression will take space for anywhere between N and 2N-1 characters.
 The space complexity used for the stack is O(N).
+
+I think this solution could be further optimized adding characters to a list for each recursive call
+instead of creating a new string, then joining them using .join() if it becomes a valid expression.
 """
 class Solution(object):
     def addOperators(self, num, target):
