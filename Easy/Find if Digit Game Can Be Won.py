@@ -20,4 +20,11 @@ class Solution(object):
 # One line solution:
 def canAliceWin2(self, nums):
     return sum([x for x in nums if x < 10]) != sum([x for x in nums if x >= 10])
+
+
+# Memory optimized one-line solution. It is optimal because it uses a generator,
+# which doesn't create an intermediate list, unlike the solution above. It only
+# considers each element at a time and builds up a sum.
+def canAliceWin3(self, nums):
+    return sum(x for x in nums if x < 10) != sum(x for x in nums if x >= 10)
         
