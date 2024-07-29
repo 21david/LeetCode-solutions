@@ -15,4 +15,9 @@ class Solution(object):
         sum1 = sum([x for x in nums if x < 10])
         sum2 = sum([x for x in nums if x >= 10])
         return sum1 != sum2
+
+
+# One line solution:
+def canAliceWin2(self, nums):
+    return sum([x for x in nums if x < 10]) != sum([x for x in nums if x >= 10])
         
