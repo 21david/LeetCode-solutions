@@ -32,16 +32,19 @@ class Solution(object):
         and removing words from the set instead of setting the array element to None.
 
         Space complexity:
-        Input space complexity: 
-        O(N * M). N words with M characters each.
-        Auxiliary space complexity:
-        The queue may grow to be almost the size of wordList, so this is O(N), because
-        only a pointer to the original string is stored in this queue, along with an integer. 
-        A pointer takes up constant space.
-        All other variables take up constant space (including enumerate(wordList),
-        because that returns an iterator that creates the pairs on the fly). So
-        the total auxiliary space complexity is O(N).
-        Output space complexity: O(1) since it is just an integer.
+            Input space complexity: 
+            O(N * M). N words with M characters each.
+            
+            Auxiliary space complexity:
+            The queue may grow to be almost the size of wordList, so this is O(N), because
+            only a pointer to the original string is stored in this queue, along with an integer. 
+            A pointer takes up constant space.
+            All other variables take up constant space (including enumerate(wordList),
+            because that returns an iterator that creates the pairs on the fly). So
+            the total auxiliary space complexity is O(N).
+            
+            Output space complexity:
+            O(1) since it is just an integer.
         """
         if endWord not in wordList:
             return 0
@@ -70,3 +73,81 @@ def differ_by_one(w1, w2):
         if w1[i] != w2[i]:
             count += 1
     return count == 1 
+
+
+"""
+Solution 2 (inspired by LeetCode editorial):
+A similar BFS approach.
+"""
+class Solution(object):
+    def ladderLength(self, beginWord, endWord, wordList):
+        """
+        :type beginWord: str
+        :type endWord: str
+        :type wordList: List[str]
+        :rtype: int
+        """
+        """
+        Do a BFS style traversal through the array. Start with the first word.
+        We will find all the words that differ by 1 like this:
+        Convert the wordList into a hash set.
+        Replace every letter in the current word with every other possible letter
+        in the alphabet, and each time, check if that new word is in the set.
+        For each word that is different by 1 and found to be in the set, we will
+        put it in the BFS queue along with its distance from beginWord, which we
+        will store as an integer that increments by 1 from the previous distance.
+        When we have tried all possible words with 1 different letter, we remove
+        the word from the hash set to avoid infinite loops from the following words.
+        If we find the endWord, we return the level it was on and stop searching.
+        This will return the minimum 'distance' to the endWord because the BFS 
+        processes all 'levels' in order from lowest to greatest, so if the endWord
+        is reached, then it's level is guaranteed to be the minimum number of
+        transformations needed. If we never find it, we return 0. We can still 
+        optimize by checking if endWord is even in the set we create, and return 0 
+        immediately if it isn't.
+
+        N = length of wordList
+        M = number of characters in beginWord (which is equal for every other word)
+        Time complexity:
+        I think it is O(N * M^2 + N^2). 
+        N * M^2 because the BFS loop may run N times, and within each loop, all M letters are
+        isolated, and a new word of length M is created for each of those letters.
+
+        N^2 because the loop may run N times, and almost N total words may be removed from 
+        the hash set, which is an O(N) operation in the worst case. Note: Python's hash set
+        implementation is known to be very efficient, so this N^2 case is very unlikely.
+        
+        The best case scenario, however, is O(1), if the BFS finds the endWord right away.
+
+        Space complexity:
+            Input space complexity: O(N * M). N words with M characters.
+
+            Auxiliary space complexity: O(N * M). Almost all the words could be stored in the
+            queue at once in the worst case.
+
+            Output space complexity: O(1) for the integer that is returned.
+        """
+        words = set(wordList)
+        if endWord not in words:
+            return 0
+
+        # BFS
+        q = deque([(beginWord, 1)])
+
+        while q:  # O(N)
+            word, level = q.popleft()
+
+            # Find 'neighbors'
+            for i, c in enumerate(word):  # O(M)
+                # Try every word that is different by 1 letter ('neighbor' words)
+                for l in 'qwertyuiopasdfghjklzxcvbnm':  # O(1)
+                    possible_word = word[:i] + l + word[i+1:]  # O(M)
+                    if possible_word in words:  # Found a 'neighbor' word
+                        if possible_word == endWord:
+                            return level + 1
+                        q.append((possible_word, level + 1))
+                        words.remove(possible_word)  # Remove so that we don't loop back in the future (O(N) worst case)
+        
+        return 0
+        
+
