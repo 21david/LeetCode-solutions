@@ -92,3 +92,56 @@ class Solution(object):
             return self.ans
 
 
+'''
+Solution 4:
+The idea behind this solution is that you are searching for p like a normal BST search.
+As you go through nodes, if the current node is greater than p, then we store that into 
+a variable. We store only values greater than p because we don't want values lesser than p.
+If we haven't found p yet and we found a value lesser than p, we move on to its left subtree
+which consists strictly of values less than the current node. So if we store this number,
+it will only get updated with numbers lesser than it and greater than p as we traverse the tree.
+If we reach the node equal to p, we don't save it, and we continue the traversal to search
+the right subtree, which if it exists, will contain the successor. In this case, since we skip
+actual p, every node in the right subtree is greater than p, and we will traverse to the
+smallest node as a result of searching for p, which will ultimately update our variable to that
+smallest value.
+
+This algorithm is a slightly modified version of regular BST. The difference is that if you
+find the node you are looking for, since you are looking for its successor, you continue
+searching as if p was greater than itself (move on to the right subtree). The result of this is
+finding the successor.
+
+It has better time complexity because is runs logarithmically. If the tree is balanced, it
+very efficiently rules out half of the nodes at each stage. However, if the tree is skewed,
+it can still run in linear time.
+'''
+class Solution(object):
+    def inorderSuccessor(self, root, p):
+        """
+        :type root: TreeNode
+        :type p: TreeNode
+        :rtype: TreeNode
+        """
+        result = None
+
+        while root:
+            if root.val > p.val:  # current node greater than p
+                result = root
+                root = root.left
+            else:  # current node is equal or lesser than p
+                root = root.right
+
+        return result
+
+
+
+'''
+A brute force approach would be to do an in-order DFS traversal and create an
+array where all the elements are in order. Then, search for p (binary-search
+would optimize this), and then return the next number that is greater than p,
+or null if there isn't such a number.
+
+This would have to traverse the entire tree and create an array the size of
+the tree, and then another traversal to search for p, so this is the worst
+of all the solutions.
+'''
