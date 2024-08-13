@@ -6,6 +6,10 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+
+'''
+Using strings, concatenation, and binary conversion algorithm
+'''
 class Solution(object):
     def sumRootToLeaf(self, root):
         """
@@ -29,4 +33,35 @@ class Solution(object):
             num_slate.pop()
             
         dfs(root, [])
+        return self.total
+
+
+'''
+Using math
+'''
+class Solution(object):
+    def sumRootToLeaf(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        self.total = 0
+    
+        def dfs(node, num):
+            if not (node.left or node.right):
+                num <<= 1
+                num += node.val
+                self.total += num
+                num >>= 1
+                return
+                
+            num <<= 1
+            num += node.val
+            if node.left:
+                dfs(node.left, num)
+            if node.right:
+                dfs(node.right, num)
+            num >>= 1
+            
+        dfs(root, 0)
         return self.total
