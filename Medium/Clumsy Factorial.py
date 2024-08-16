@@ -48,3 +48,32 @@ class Solution(object):
             return total - buffer
         else:
             return total + buffer
+
+'''
+Creative version written with ChatGPT. Same approach as above.
+'''
+class Solution:
+    def clumsy(self, n: int) -> int:
+        if n <= 2:
+            return n
+        elif n == 3:
+            return 3 * 2
+
+        def operation_generator():
+            while True:
+                yield lambda total, buffer, n: (total - buffer + n, 0)  # subtract and reset buffer
+                yield lambda total, buffer, n: (total, buffer + n)  # Add
+                yield lambda total, buffer, n: (total, buffer * n)  # Multiply
+                yield lambda total, buffer, n: (total, buffer // n) # Integer division
+        
+        total = n * (n-1) // (n-2)
+        buffer = 0
+        n -= 2
+        i = 2
+
+        operations = operation_generator()
+
+        while n := n - 1:
+            total, buffer = next(operations)(total, buffer, n)
+
+        return total - buffer
