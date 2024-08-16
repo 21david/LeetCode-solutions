@@ -48,3 +48,17 @@ class Solution(object):
                 return True
         
         return False
+
+
+'''
+Next 2 solutions are just for fun. Same as solution 2, but shorter.
+'''
+class Solution(object):
+    def judgeSquareSum(self, c):
+        def is_perfect_square(n):
+            return int(sqrt(n))**2 == n
+        return any(is_perfect_square(c - n**2) for n in range(int(sqrt(c)), -1, -1))
+
+class Solution(object):
+    def judgeSquareSum(self, c):
+        return any(int(sqrt(c - n**2))**2 == c - n**2 for n in range(int(sqrt(c)), -1, -1))
