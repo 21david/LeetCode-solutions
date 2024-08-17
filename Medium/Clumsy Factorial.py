@@ -77,3 +77,11 @@ class Solution:
             total, buffer = next(operations)(total, buffer, n)
 
         return total - buffer
+
+
+# One line written with help of ChatGPT. Not to be taken seriously.
+# See explanation: https://leetcode.com/problems/clumsy-factorial/solutions/5647792/extremely-long-one-line-solution-and-explanation/
+from functools import reduce
+class Solution:
+    def clumsy(self, n: int) -> int:
+        return reduce(lambda acc, i: (lambda total, buffer, n: (total, buffer + n), lambda total, buffer, n: (total, buffer * n), lambda total, buffer, n: (total, buffer // n), lambda total, buffer, n: (total - buffer + n, 0))[(n-i) % 4](*acc, i), range(n-3, 0, -1), (n * (n-1) // (n-2), 0))[0] - reduce(lambda acc, i: (lambda total, buffer, n: (total, buffer + n), lambda total, buffer, n: (total, buffer * n), lambda total, buffer, n: (total, buffer // n), lambda total, buffer, n: (total - buffer + n, 0))[(n-i) % 4](*acc, i), range(n-3, 0, -1), (n * (n-1) // (n-2), 0))[1] if n > 3 else 3 * bool(n == 3) + n
