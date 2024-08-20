@@ -27,7 +27,6 @@ class Solution {
         while(i < rating.length - 2) {
             while(j < rating.length - 1) {
                 while(k < rating.length) {
-                    
                     if(checkTeam(rating, i, j, k)) // if this is a valid team
                         count++;
                     
