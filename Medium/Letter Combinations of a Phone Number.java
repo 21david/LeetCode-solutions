@@ -37,7 +37,6 @@ class Solution {
         udc
         uea
         ...
-        
         */
         
         if(digits.length() == 0)
@@ -65,7 +64,6 @@ class Solution {
     private List<String> solution = new ArrayList<>();
     
     public void recursive(StringBuilder a, List<String> b) {
-        
         // once the list is empty, then we have a valid letter combination in a
         if(b.isEmpty()) {
             solution.add(a.toString());
