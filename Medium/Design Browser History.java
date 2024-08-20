@@ -10,7 +10,6 @@ class BrowserHistory {
     
     public BrowserHistory(String homepage) {
         history = new ArrayList<>();
-        
         history.add(homepage);
         cur = 0;
     }
@@ -29,7 +28,6 @@ class BrowserHistory {
     }
     
     public String back(int steps) {
-        
         cur -= steps;
         
         if(cur < 0) {
