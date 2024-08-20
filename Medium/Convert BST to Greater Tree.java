@@ -19,14 +19,10 @@
  */
 class Solution {
     public TreeNode convertBST(TreeNode root) {
-        
         ArrayList<Integer> inOrder = new ArrayList<>();
         
         // traverse in-order, and put the values in the ArrayList
         inOrderTraversal(root, inOrder);
-        
-     //   System.out.println(inOrder);
-        
         
         HashMap<Integer, Integer> map = new HashMap<>();
         
@@ -39,15 +35,12 @@ class Solution {
             map.put(inOrder.get(i), sum);
         }
         
-      //  System.out.println(map);
-        
         // relace all vals in the tree with the corresponsing sum
         replaceValues(root, map);
         
         // return the finished tree
         return root;
     }
-    
         
     /*
     Traverse the BST in an in-order style, and add the elements to inOrder
@@ -63,7 +56,6 @@ class Solution {
         inOrder.add(root.val);
         inOrderTraversal(root.right, inOrder);
     }
-    
     
     /*
     Traverse the tree, replacing each node value with its corersponding value in the map.
