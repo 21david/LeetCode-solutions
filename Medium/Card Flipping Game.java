@@ -18,7 +18,6 @@ class Solution {
             "eliminated". Then, we return the smallest number in the HashSet.
         */
         
-        
         HashSet<Integer> goodNums = new HashSet<>();
         
         for(int n : fronts)
