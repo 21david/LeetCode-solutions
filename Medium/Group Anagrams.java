@@ -15,8 +15,6 @@ class Solution {
         // 5 ms, faster than 99.36%
         // 42.4 mb, less than 91.81%
         
-        // Runtime: O(N)?
-        
         // Map Hash value -> List of words
         HashMap<Long, List<String>> map = new HashMap<>();
         
