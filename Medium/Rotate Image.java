@@ -6,11 +6,10 @@ class Solution {
         // 38.6 mb, less than 98.82%
         
         /*
-        I think we can switch 4 spots at a time. for example, switch the four corners. Move one corner value to a temp variable, move the other 3 to their new position, then put that value into its new position. Then, repeat this
-        for every other set of 4 elements.
-        We can do this layer by layer. For example, the outer rows and columns are the first layer,
-        then the second-last rows and columns are the second layer.
-
+        I think we can switch 4 spots at a time. for example, switch the four corners. Move one corner value to a temp variable, 
+        move the other 3 to their new position, then put that value into its new position. Then, repeat this for every other set
+        of 4 elements. We can do this layer by layer. For example, the outer rows and columns are the first layer, then the 
+        second-last rows and columns are the second layer.
         */
 
         int n=matrix.length;
@@ -27,7 +26,6 @@ class Solution {
         int l = 0;  // this keeps track of the current layer we're on
         
         while( l < layers ) {
-            
             // rotate all the elements of a layer
             for(int e = 0; e < curLength-1 ; e++) {
                 // swap 4 elements
@@ -36,7 +34,6 @@ class Solution {
                 matrix[n-1-l-e][l] = matrix[n-1-l][n-1-l-e];
                 matrix[n-1-l][n-1-l-e] = matrix[l+e][n-1-l];
                 matrix[l+e][n-1-l] = temp;
-
             }
 
             l++;  // move to the next layer
