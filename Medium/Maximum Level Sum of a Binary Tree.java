@@ -24,13 +24,11 @@ class Solution {
         find the left most maximum of the array, and return the index of this array plus 1
         (element at index 0 is the root value, at index 1 is the level 2 sum, at index 2
         is the level 3 sum, ...).
-        
         */
         
         ArrayList<Integer> sums = new ArrayList<>();
         
         dfs(root, sums, 0);
-        
         
         // find max
         int max = sums.get(0);
@@ -41,7 +39,6 @@ class Solution {
                 max = sums.get(i);
                 maxI = i;
             }
-        
         
         // return max
         return maxI + 1;
@@ -55,7 +52,6 @@ class Solution {
     Here, level starts at 0 instead of 1. 
     */
     public void dfs(TreeNode root, ArrayList<Integer> sums, int level) {
-        
         if(root == null)
             return;
         
