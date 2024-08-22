@@ -17,7 +17,6 @@ class Solution {
         two adjacent elements, keeping track of the biggest difference we find.
         
         Then, we can return the product of these two.
-        
         */
         
         Arrays.sort(horizontalCuts);
@@ -35,7 +34,6 @@ class Solution {
         
         // find the last difference, which is the right edge (w) minus the last horizontal cut
         maxHor = Math.max(maxHor, h - horizontalCuts[horizontalCuts.length-1]);
-        
         
         
         // VERTICAL CUTS
