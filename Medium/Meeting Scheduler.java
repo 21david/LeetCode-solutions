@@ -6,13 +6,11 @@ class Solution {
         // 48.3 mb, less than 51.77%
         // Solved in 28 minutes 
         
-        // This approach and runtime could be drastically improved
-        
         // sorts slots1 and slots2 by the first element of each inner array
         Arrays.sort(slots1, (x, y) -> x[0] - y[0]);
         Arrays.sort(slots2, (x, y) -> x[0] - y[0]);
         
-        // i'm brute forcing it
+        // brute force
         // compare each slot in slot1 to each slot in slot2 until a solution is found
         for(int i = 0; i < slots1.length; i++) {
             for(int j = 0; j < slots2.length; j++) {
