@@ -1,4 +1,4 @@
-//  
+//  https://leetcode.com/problems/maximum-number-of-events-that-can-be-attended
 
 class Solution {
     public int maxEvents(int[][] events) {
@@ -30,7 +30,6 @@ class Solution {
         
         // for each event, check if it can still be visited
         // if event[1] is >= d, then the current event can still be visited
-        
         
         Set<Integer> set = new HashSet<>();  // keep track of days that we've used up on an event
         
