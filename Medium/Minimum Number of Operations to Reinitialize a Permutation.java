@@ -3,7 +3,6 @@
 
 class Solution {
     public int reinitializePermutation(int n) {
-        
         int[] perm = new int[n];
         for(int i = 0; i < perm.length; i++)
             perm[i] = i;
@@ -18,17 +17,14 @@ class Solution {
             }
         }
         
-        
         int[] result = new int[n];
         for(int i = 0; i < perm.length; i++) {
             result[i] = perm[newIndices[i]];
         }
         
-        
         int count = 1;
         
         while(!isOriginal(result)) {
-            
             // copy result onto perm, and start over
             for(int i = 0; i < result.length; i++)
                 perm[i] = result[i];
@@ -38,7 +34,6 @@ class Solution {
             }
             count++;
         }
-        
         
         return count;
     }
