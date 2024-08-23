@@ -21,7 +21,6 @@ class Solution {
         O(N*N) * O(1), which is O(N*N) time complexity.
         The space complexity would be O(N*N) as well since we
         make another matrix.        
-        
         */
         
         int[][] lowestSum = new int[matrix.length][matrix[0].length];
@@ -68,7 +67,6 @@ class Solution {
             ans = Math.min(ans, lowestSum[0][i]);
         
         return ans;
-        
     }
 }
 
