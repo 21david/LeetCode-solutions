@@ -1,9 +1,7 @@
 /*
 https://leetcode.com/problems/valid-parenthesis-string/
-
 LeetCode 30-day challenge, day 16
 */
-
 
 /*
 Somewhat builds off of an approach to a regular "Valid Parenthesis String" problem without the * rule.
@@ -20,7 +18,6 @@ value can never have a value of -1, so it returns false if it ever does.
 
 class Solution {
     public boolean checkValidString(String s) {
-        
         int high = 0;
         int low = 0;
         
@@ -40,7 +37,6 @@ class Solution {
                 
                 if(low > 0)
                     low--;
-                
             }
             else if(c == '*')
             {
@@ -57,6 +53,5 @@ class Solution {
             return true;
         else
             return false;
-        
     }
 }
