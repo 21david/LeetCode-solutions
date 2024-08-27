@@ -1,26 +1,26 @@
 //  https://leetcode.com/problems/verifying-an-alien-dictionary/
 
+/*
+We can go through the list of words, comparing each word with the next word, until we
+reach the end of the list. As we compare, if two words are not lexicographically in order,
+we return false. If all pairs of words return true (if they are in order), then we return 
+true at the end.
+We need a method that takes in two strings and checks that they are in order.
+To do this, we iterate through both words, comparing the letters one by one.
+If the letters are equal or if they are in order, we move to the next.
+If they are out of order, we return false for the whole algorithm right away.
+I think we can use a HashMap that maps letters to their position in the alphabet
+to help us check if two words are in order in the method we will write.
+*/
+
+// 0 ms, faster than 100%
+// 37.4 mb, less than 84.08%
+// Solved in about 35 minutes
+
 class Solution {
     int[] letterPositions = new int[26];
     
     public boolean isAlienSorted(String[] words, String order) {
-        // 0 ms, faster than 100%
-        // 37.4 mb, less than 84.08%
-        // Solved in about 35 minutes
-        
-        /*
-        We can go through the list of words, comparing each word with the next word, until we
-        reach the end of the list. As we compare, if two words are not lexicographically in order,
-        we return false. If all pairs of words return true (if they are in order), then we return 
-        true at the end.
-        We need a method that takes in two strings and checks that they are in order.
-        To do this, we iterate through both words, comparing the letters one by one.
-        If the letters are equal or if they are in order, we move to the next.
-        If they are out of order, we return false for the whole algorithm right away.
-        I think we can use a HashMap that maps letters to their position in the alphabet
-        to help us check if two words are in order in the method we will write.
-        */
-        
         if(words.length == 1)
             return true;
         
@@ -34,12 +34,10 @@ class Solution {
                 return false;
         }
         
-        
         return true;
     }
 
     public boolean isSorted(String a, String b) {
-        
         int len = Math.min(a.length(), b.length());
         
         int curCharA;
@@ -73,13 +71,13 @@ class Solution {
 Sample input:
 ["hello","leetcode"]
 "hlabcdefgijkmnopqrstuvwxyz"
+
 ["qwer", "qwert", "qwerty", "qert", "qerty", "moon", "moonbase"]
 "qwertyuiopasdfghjklzxcvbnm"
+
 ["hello","leetcode"]
 "hlabcdefgijkmnopqrstuvwxyz"
+
 ["qwerty", "qwert", "qwer", "moonbase", "moon"]
 "qwertyuiopasdfghjklzxcvbnm"
-
-
-
 */
