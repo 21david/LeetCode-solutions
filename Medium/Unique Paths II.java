@@ -1,25 +1,24 @@
 //  https://leetcode.com/problems/unique-paths-ii/
 
+/*
+I remember this as a math problem from a long time ago.
+If you start from the end point, you can know easily how many ways
+to get to it from the adjacent cells around it (above and to the left).
+There would only be 1 way for each, so their value becomes 1.
+Then, for the next adjacent cells, we can do the same using the values
+of the cells below and to the right. So the value for each cell becomes
+the sum of the value of the blocks to the right and below. We can fill out
+the end point as 1, and work our way from right-to-left, bottom-to-top,
+filling out the value for each cell, until we reach the top-left corner.
+Obstacles would be treated as having a value of 0.
+*/
+
+// 1 ms, faster than 15.13%
+// 38.5 mb, less than 21.27%
+// Solved in 38 minutes (with distractions)
+
 class Solution {
     public int uniquePathsWithObstacles(int[][] obstacleGrid) {
-        // 1 ms, faster than 15.13%
-        // 38.5 mb, less than 21.27%
-        // Solved in 38 minutes (with distractions), 0 hints
-        
-        /*
-        I remember this as a math problem from a long time ago.
-        If you start from the end point, you can know easily how many ways
-        to get to it from the adjacent cells around it (above and to the left).
-        There would only be 1 way for each, so their value becomes 1.
-        Then, for the next adjacent cells, we can do the same using the values
-        of the cells below and to the right. So the value for each cell becomes
-        the sum of the value of the blocks to the right and below. We can fill out
-        the end point as 1, and work our way from right-to-left, bottom-to-top,
-        filling out the value for each cell, until we reach the top-left corner.
-        Obstacles would be treated as having a value of 0.
-        
-        */
-        
         int rows = obstacleGrid.length;
         int cols = obstacleGrid[0].length;
         
@@ -33,7 +32,6 @@ class Solution {
             for(int c = 0; c < obstacleGrid[0].length; c++)
                 if(obstacleGrid[r][c] == 1) 
                     waysToTarget[r][c] = -1;
-        
         
         // navigate from right-to-left, bottom-to-top, calculating a value
         // for each cell as we go
@@ -64,7 +62,6 @@ class Solution {
             }
         }
         
-        
         return waysToTarget[0][0];
     }
     
@@ -76,9 +73,12 @@ class Solution {
 /*
 Sample input:
 [[0,0,0],[0,1,0],[0,0,0]]
-[[0,0,0,0,0],[0,0,0,1,0],[0,1,0,0,0],[0,0,0,0,0],[0,0,0,0,0]]
-[[0,0,0,0,1],[0,0,0,0,0],[0,0,0,1,1],[0,0,0,0,0],[0,0,0,0,0],[0,1,0,0,0]]
-[[0,0],[0,1]]
-[[1,0]]
 
+[[0,0,0,0,0],[0,0,0,1,0],[0,1,0,0,0],[0,0,0,0,0],[0,0,0,0,0]]
+
+[[0,0,0,0,1],[0,0,0,0,0],[0,0,0,1,1],[0,0,0,0,0],[0,0,0,0,0],[0,1,0,0,0]]
+
+[[0,0],[0,1]]
+
+[[1,0]]
 */
