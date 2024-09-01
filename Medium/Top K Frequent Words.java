@@ -1,19 +1,18 @@
 //  https://leetcode.com/problems/top-k-frequent-words/
 
+/*
+HashMap to store frequencies
+Then put them into an array of Word objects
+then sort the array of word objects using first the
+frequency, and then the strings themselves
+*/
+
+// 5 ms, faster than 85.97%
+// 39.1 mb, less than 57.99%
+// Solved in 20 minutes 25 seconds
+
 class Solution {
     public List<String> topKFrequent(String[] words, int k) {
-        // 5 ms, faster than 85.97%
-        // 39.1 mb, less than 57.99%
-        // Solved in 20 minutes 25 seconds
-        
-        /*
-        HashMap to store frequencies
-        
-        Then put them into an array of Word objects
-        then sort the array of word objects using first the
-            frequency, and then the strings themselves
-        */
-        
         HashMap<String, Integer> hashMap = new HashMap<>();
         for(String word : words)
             if(hashMap.containsKey(word))
@@ -21,13 +20,9 @@ class Solution {
             else
                 hashMap.put(word, 1);
         
-  //      System.out.println(hashMap);
-        
-        
         // After we have filled out the hash map, we should transfer
         // the data onto this array, which we will then sort using the
         // logic given in the description
-        
         Count[] counts = new Count[hashMap.size()];
         
         // fill in array
@@ -37,13 +32,10 @@ class Solution {
         int i = 0;
         String curKey;
         while(it.hasNext()) {
-            
             curKey = (String) it.next();
             counts[i] = new Count(hashMap.get(curKey), curKey);
             i++;
         }
-        
-  //      System.out.println(Arrays.toString(counts));
         
         Arrays.sort(counts, (e1, e2) -> {
            // custom sorting logic
@@ -52,19 +44,15 @@ class Solution {
                 return 1;
             else if(e1.freq > e2.freq)
                 return -1;
-            else { // if the have equal frequency, sort lexicographically
+            else  // if the have equal frequency, sort lexicographically
                 return e1.word.compareTo(e2.word);
-            }
         });
-        
-  //      System.out.println(Arrays.toString(counts));
         
         // now we create the final array
         List<String> ans = new ArrayList<>();
         for(int c = 0; c < k; c++) {
             ans.add(counts[c].word);
         }
-        
         
         return ans;
     }
@@ -88,10 +76,15 @@ class Solution {
 Sample input:
 ["i", "love", "leetcode", "i", "love", "coding"]
 2
+
 ["the", "day", "is", "sunny", "the", "the", "the", "sunny", "is", "is"]
 4
+
 ["a", "aa", "a", "aa", "a", "aa", "A", "AA", "A", "AA", "A", "AA"]
 4
 
+*/
 
+/*
+A better approach would likely be to use the Quick Sort algorithm.
 */
