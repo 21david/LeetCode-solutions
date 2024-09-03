@@ -1,5 +1,7 @@
 '''
 https://leetcode.com/problems/paint-fence
+See my other solutions here:
+https://github.com/21david/Interview-Kickstart/blob/main/Week%205%20-%20Dynamic%20Programming/Color%20The%20Fence.py
 '''
 
 '''
