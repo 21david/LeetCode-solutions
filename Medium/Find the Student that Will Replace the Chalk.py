@@ -51,3 +51,15 @@ class Solution:
         # exceed the remaining chalk left. If it exceeds the remainder chalk,
         # it means that student would be the one that runs out.
         return bisect(total_chalk_used, remainder)
+
+
+'''
+One line solution with binary search
+TC: O(N)
+  N + log N
+SC: O(N)
+'''
+from bisect import bisect
+class Solution:
+    def chalkReplacer(self, chalk: List[int], k: int) -> int:
+        return bisect(prefix_sum := list(accumulate(chalk)), k % prefix_sum[-1])
