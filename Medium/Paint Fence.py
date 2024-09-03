@@ -32,3 +32,23 @@ class Solution:
 
         # Count how many are valid
         return sum(1 for way in ways if is_valid_way(way))
+
+
+'''
+Fibonacci based, space-optimized, DP solution
+TC: O(N)
+SC: O(1)
+'''
+class Solution:
+    def numWays(self, n: int, k: int) -> int:
+        if n == 1: return k
+
+        a = k
+        b = k**2
+
+        for _ in range(3, n+1):
+            temp = (a + b) * (k-1)
+            a = b
+            b = temp
+
+        return b
