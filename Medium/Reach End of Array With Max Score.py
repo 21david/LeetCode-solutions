@@ -80,3 +80,15 @@ class Solution:
 
         return total_score
             
+'''
+Python 1-line solution
+seen on LeetCode
+
+accumulate() with the max function as an argument creates an array
+with the highest value at or to the left of each index.
+If we sum all of those, we get the same value as in the algorithm
+above.
+'''
+class Solution:
+    def findMaximumScore(self, nums: List[int]) -> int:
+        return sum(accumulate(nums[:-1], max))
