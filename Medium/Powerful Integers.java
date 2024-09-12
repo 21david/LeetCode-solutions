@@ -1,22 +1,21 @@
-//  https://leetcode.com/problems/powerful-integers/
+//  https://leetcode.com/problems/powerful-integers
+        
+/*
+Brute force approach works.
+Try every combination of i and j, until
+their value (x^i + y^j) is bigger than
+the bound. A nested loop works. The inner
+loop tries all values of j until it 
+gets too big. The outer one tries all
+values of i until it gets too big.
+Gotta be careful with edge cases.
 
+1 ms, faster than 98.44%
+36.9 mb, less than 40.10%
+*/
 class Solution {
     public List<Integer> powerfulIntegers(int x, int y, int bound) {
-        // 1 ms, faster than 98.44%
-        // 36.9 mb, less than 40.10%
-        
-        /*
-        Brute force approach works.
-        Try every combination of i and j, until
-        their value (x^i + y^j) is bigger than
-        the bound. A nested loop works. The inner
-        loop tries all values of j until it 
-        gets too big. The outer one tries all
-        values of i until it gets too big.
-        Gotta be careful with edge cases.
-        */
-        
-        if(bound < 2)
+       if(bound < 2)
             return new ArrayList<Integer>();
         
         if(x == 1 || y == 1)
@@ -28,7 +27,6 @@ class Solution {
         int val = plugIntoFormula(x, i, y, j);
         
         while(plugIntoFormula(x, i, y, j) <= bound) {
-            
             val = plugIntoFormula(x, i, y, j);
             
             while(val <= bound) {
@@ -40,7 +38,6 @@ class Solution {
             i++;
             j = 0;
         }
-        
         
         // Convert HashSet<Integer> to List<Integer>
         List<Integer> sol = new ArrayList<>();
@@ -72,7 +69,6 @@ class Solution {
             j++;
             val = plugIntoFormula(x, 0, y, j);
         }
-        
         
         // Convert HashSet<Integer> to List<Integer>
         List<Integer> sol = new ArrayList<>();
