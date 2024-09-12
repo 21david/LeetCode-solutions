@@ -4,19 +4,18 @@ https://leetcode.com/problems/product-of-array-except-self/
 
 // LeetCode 30 day challenge, day 15
 
+/*
+Create 2 arrays (O(N) + O(N) or O(N) depending on implementation)
+- (leftProducts) one holds the product of all the numbers to the left of nums[i]
+- (rightProducts) the other holds the product of all the numbers to the right of nums[i]
+
+Create the final answer array
+- for each element, multiply the product of the elements to the left of it (leftProducts[i-1])
+  with the product of the elements to the right of it (rightProducts[i+1])
+- first and last elements will just use one of those arrays
+*/
 class Solution {
     public int[] productExceptSelf(int[] nums) {
-        /*
-        Create 2 arrays (O(N) + O(N) or O(N) depending on implementation)
-        - (leftProducts) one holds the product of all the numbers to the left of nums[i]
-        - (rightProducts) the other holds the product of all the numbers to the right of nums[i]
-        
-        Create the final answer array
-        - for each element, multiply the product of the elements to the left of it (leftProducts[i-1])
-          with the product of the elements to the right of it (rightProducts[i+1])
-        - first and last elements will just use one of those arrays
-        */
-        
         int[] leftProducts = Arrays.copyOf(nums, nums.length);
         int[] rightProducts = Arrays.copyOf(nums, nums.length);
         
@@ -28,7 +27,6 @@ class Solution {
             
             rightProducts[last - i] = rightProducts[last - i + 1] * rightProducts[last - i];
         }
-        
         
         // for each element, multiply the left product with the right product
         int left = 1;
@@ -50,6 +48,5 @@ class Solution {
         }
         
         return nums;
-        
     }
 }
