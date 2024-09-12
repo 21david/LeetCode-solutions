@@ -10,24 +10,25 @@
  *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
+
+/*
+Approach after seeing optimal solution: 
+We can iterate to the (n+1)th node using a pointer, then, we can
+set another pointer to the beginning and iterate both
+pointers at the same speed until the second pointer
+reaches the null at the end. They will have a gap of
+n+1 in between, and this gap will put our leftmost pointer
+on the node right before the one we want to remove.
+Then, we just remove the node and return the head.
+Time complexity: O(N) (one pass through the linked list)
+Space complexity: O(1), no extra memory is used except pointers
+
+0 ms, faster than 100%
+36.8 mb, less than 65.70%
+Solved in about 30+ minutes
+*/
 class Solution {
     public ListNode removeNthFromEnd(ListNode head, int n) {
-        // 0 ms, faster than 100%
-        // 36.8 mb, less than 65.70%
-        // Solved in about 30+ minutes
-        
-        /*
-        Approach after seeing optimal solution: 
-        We can iterate to the (n+1)th node using a pointer, then, we can
-        set another pointer to the beginning and iterate both
-        pointers at the same speed until the second pointer
-        reaches the null at the end. They will have a gap of
-        n+1 in between, and this gap will put our leftmost pointer
-        on the node right before the one we want to remove.
-        Then, we just remove the node and return the head.
-        Time complexity: O(N) (one pass through the linked list)
-        Space complexity: O(1), no extra memory is used except pointers
-        */
         if(head == null || head.next == null)
             return null;
         
@@ -60,15 +61,19 @@ class Solution {
 Sample input:
 [1,2,3,4,5]
 2
+
 [2,4,6,8,10]
-1
-[2,4,6,8,10]
-3
-[2,4,6,8,10]
-4
-[2,4,6,8,10]
-5
-[1]
 1
 
+[2,4,6,8,10]
+3
+
+[2,4,6,8,10]
+4
+
+[2,4,6,8,10]
+5
+
+[1]
+1
 */
