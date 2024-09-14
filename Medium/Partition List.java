@@ -10,23 +10,22 @@
  *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
+ 
+/*
+A basic approach would be to create a new LinkedList
+and traverse the input list twice. The first time, adding
+nodes that are < x to the new list, and the second time,
+adding nodes that are >= x.
+
+1 ms, faster than 7.02%
+38.1 mb, less than 83.21%
+*/
 class Solution {
     public ListNode partition(ListNode head, int x) {
-        // 1 ms, faster than 7.02%
-        // 38.1 mb, less than 83.21%
-        
-        /*
-        A basic approach would be to create a new LinkedList
-        and traverse the input list twice. The first time, adding
-        nodes that are < x to the new list, and the second time,
-        adding nodes that are >= x.
-        */
-        
         if(head == null)
             return null;
         
         ArrayList<Integer> temp = new ArrayList<>();
-        
         ListNode iterate = head;
         
         while(iterate != null) {
