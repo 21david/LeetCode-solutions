@@ -21,8 +21,7 @@ class StockSpanner {
         
         int count = 1;
         
-        for(int i = prices.size() - 2; i >= 0; i--)
-        {
+        for(int i = prices.size() - 2; i >= 0; i--) {
             if(prices.get(i) <= price)
                 count++;
             else
