@@ -1,10 +1,9 @@
 //  https://leetcode.com/problems/critical-connections-in-a-network/
 
+// 103 ms, faster than 63.67%
+// 103.5mb, less than 73.01%
+// Solved in 50 minutes using solution at  youtube.com/watch?v=erlX-1MJlv8&t=2s
 class Solution {
-    // 103 ms, faster than 63.67%
-    // 103.5mb, less than 73.01%
-    // Solved in 50 minutes using solution at  youtube.com/watch?v=erlX-1MJlv8&t=2s
-    
     ArrayList<ArrayList<Integer>> adjList = new ArrayList<>();
     List<List<Integer>> solution = new ArrayList<List<Integer>>();
     
@@ -32,14 +31,12 @@ class Solution {
         return solution;
     }
     
-    
     boolean[] visited;
     int[] visitedTimes;
     int[] lowTimes;
     int time = 0;
     
     public void dfs(int currNode, int parentNode) {
-    
         visited[currNode] = true;
         visitedTimes[currNode] = lowTimes[currNode] = time++;
 
@@ -69,6 +66,4 @@ Sample input:
 [[0,1],[1,2],[2,0],[1,3]]
 10
 [[0,1],[0,2],[1,3],[2,3],[3,4],[2,5],[5,6],[5,7],[5,8],[6,7],[7,8],[6,9],[7,9],[8,9]]
-
-
 */
