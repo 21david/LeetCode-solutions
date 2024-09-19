@@ -1,24 +1,22 @@
 //  https://leetcode.com/problems/minimum-operations-to-make-array-equal/
 
+// Solved with loop in 11 minutes
+// with equation in 20-30 mins?
+
+/*
+The formula for finding the answer would be
+(n-1) + ((n-1) - 2) + ((n-1) - 4) + ... + 0
+
+which is equal to
+
+(N/2)*(N*2-1)
+
+for 
+*/
 class Solution {
-    // Solved with loop in 11 minutes
-    // with equation in 20-30 mins?
-    
-    /*
-        The formula for finding the answer would be
-        (n-1) + ((n-1) - 2) + ((n-1) - 4) + ... + 0
-        
-        which is equal to
-        
-        (N/2)*(N*2-1)
-        
-        for 
-    */
     public int minOperations(int n) {
         return n % 2 == 0? (int) ((((double)n/2)/2) * (((double)n/2)*2)) : ((n/2+1) * ((n/2+1)-1));
     }
-    
-    
     
     public int minOperationsLongFormula(int n) {
         if(n % 2 == 0) {
@@ -32,19 +30,15 @@ class Solution {
             
             return fOdd(n);
         }
-        
     }
     
     public int fEven(int N) {
         return (int) (((double)N/2) * (N*2));
     }
     
-    
     public int fOdd(int N) {
         return N * (N-1);
     }
-    
-    
     
     public int minOperationsLoop(int n) {
         int N = n-1;
