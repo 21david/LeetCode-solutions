@@ -1,11 +1,10 @@
 //  https://leetcode.com/problems/non-decreasing-array/
 
+// 0 ms, faster than 100% (varies with each submission...)
+// 40.1 mb, les than 71.54% (varies with each submission...)
+// Solved in 32 minutes
 class Solution {
     public boolean checkPossibility(int[] nums) {
-        // 0 ms, faster than 100% (varies with each submission...)
-        // 40.1 mb, les than 71.54% (varies with each submission...)
-        // Solved in 32 minutes
-        
         int ct = 0;
         int index = 0;
         
@@ -16,14 +15,10 @@ class Solution {
                 ct++;
                 index = i;
             }
-
         }
-        
- //      System.out.println(Arrays.toString(nums) + " " + index + " " + nums[index]);
         
         if(ct == 0)
           return true;
-        
         if(index == 0)
             return true;
         if(index == nums.length - 2)  // we could change the last element
@@ -37,6 +32,7 @@ class Solution {
         return true;
     }
 }
+
 /*
 Sample input:
 [4,2,3]
