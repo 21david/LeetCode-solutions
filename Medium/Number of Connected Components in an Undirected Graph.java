@@ -1,18 +1,17 @@
 //  https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/
 
+/*
+Convert to adjacency list.
+You could make a boolean array that marks each node as visited
+when it gets visited, then try to do a DFS at each node.
+If the node was not visited, then we add 1 to the count of 
+connected components. If it was visited already, then we do
+nothing and try the next node.
+After trying all the nodes, we should have a count of connected
+components.
+*/
 class Solution {
     public int countComponents(int n, int[][] edges) {
-        /*
-        Convert to adjacency list.
-        You could make a boolean array that marks each node as visited
-        when it gets visited, then try to do a DFS at each node.
-        If the node was not visited, then we add 1 to the count of 
-        connected components. If it was visited already, then we do
-        nothing and try the next node.
-        After trying all the nodes, we should have a count of connected
-        components.
-        */
-        
         // make an arraylist with n empty arraylists
         ArrayList<ArrayList<Integer>> adjList = new ArrayList<>();
         for(int i = 0; i < n; i++)
@@ -27,7 +26,6 @@ class Solution {
         boolean[] visited = new boolean[n];
         
         // dfs at each node
-        
         for(int node = 0; node < n; node++) {
             dfs(adjList, node, visited);
         }
@@ -81,5 +79,4 @@ Sample input:
 [[0,1]]
 2
 [[1,0]]
-
 */
