@@ -15,14 +15,15 @@
  *     }
  * }
  */
+
+/*
+We can traverse through the tree (DFS or BFS). For every even-valued node,
+we can add all of its grand-children to a sum variable.
+Then we can return the sum.
+*/
 class Solution {
     int sum = 0;
     public int sumEvenGrandparent(TreeNode root) {
-        /*
-        We can traverse through the tree (DFS or BFS). For every even-valued node,
-        we can add all of its grand-children to a sum variable.
-        Then we can return the sum.
-        */
         // DFS
         Stack<TreeNode> stack = new Stack<>();
         stack.add(root);
