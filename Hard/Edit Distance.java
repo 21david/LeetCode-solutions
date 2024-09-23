@@ -1,14 +1,12 @@
 //  https://leetcode.com/problems/edit-distance/
 
 // recursive solution
+// Time Limit Exceeded
+// Passes 25/1142 test cases
 class Solution {
-    public int minDistance(String word1, String word2) {/
-        // Time Limit Exceeded
-        // Passes 25/1142 test cases
-        
+    public int minDistance(String word1, String word2) {        
         return minDistanceHelper(word1, word2, word1.length() - 1, word2.length() - 1);
     }
-    
     
     public int minDistanceHelper(String w1, String w2, int i, int j)
     {
@@ -34,8 +32,6 @@ class Solution {
         }
     }
     
-    
-    
     public static int min(int... args)
     {
         int min = args[0];
@@ -50,11 +46,10 @@ class Solution {
 
 
 // dynamic programming approach, bottom up
+// 7 ms, faster than 23.75%
+// 41.2 MB, less than 5.00%
 class Solution {
     public int minDistance(String word1, String word2) {
-        // 7 ms, faster than 23.75%
-        // 41.2 MB, less than 5.00%
-        
         if(word1.length() == 0)
             return word2.length();
         else if(word2.length() == 0)
@@ -93,7 +88,6 @@ class Solution {
         return min;
     }
 }
-
 
 /*
 Test cases:
