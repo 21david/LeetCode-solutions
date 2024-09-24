@@ -1,13 +1,9 @@
 // https://leetcode.com/problems/insert-interval/
 // 4-3-2020
 
-class Solution
-{
-	public int[][] insert(int[][] intervals, int[] newInterval)
-	{
-		// create a boolean array, same size as # of intervals
+class Solution {
+	public int[][] insert(int[][] intervals, int[] newInterval) {
 		boolean[] overlaps = new boolean[intervals.length];
-
 		boolean overlapped = false;
 
 		// iterate through set of intervals, set corresponding element in boolean array to TRUE if elements overlap, FALSE if it doesn't
@@ -24,7 +20,6 @@ class Solution
 				overlapped = true;
 			}
 		}
-
         
 		ArrayList<int[]> newSet = new ArrayList<>();
 
@@ -53,7 +48,6 @@ class Solution
 
 			return convert(newSet);
 		}
-
         
 		// iterate through boolean array
 		int min = 0, max = 0;
