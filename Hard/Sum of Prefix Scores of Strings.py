@@ -1,4 +1,6 @@
 """
+https://leetcode.com/problems/sum-of-prefix-scores-of-strings/description/?envType=daily-question&envId=2024-09-25
+
 The approach here is to use a Trie. To build a Trie, we add each word to the Trie.
 For each word, we expand the Trie as needed, adding each letter into it.
 This involves adding a node for each letter. If the letter already exists, then we
