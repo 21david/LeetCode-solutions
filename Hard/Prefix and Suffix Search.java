@@ -1,10 +1,8 @@
 //  https://leetcode.com/problems/prefix-and-suffix-search/
-
+// 801 ms, faster than 5.15%
+// 56.3 mb, less than 82.83%
+// Solved in 23 minutes, used the hint
 class WordFilter {
-    // 801 ms, faster than 5.15%
-    // 56.3 mb, less than 82.83%
-    // Solved in 23 minutes, used the hint
-    
     String[] dict;
     HashMap<String, Integer> cache;  // cache inputs and their outputs
     
@@ -47,5 +45,4 @@ Sample input:
 [[["apple", "banana", "cat", "dogecoin", "elephant", "fred", "google", "groogle", "halloween"]],["g","e"], ["d","n"]]
 ["WordFilter","f","f"]
 [[["google", "halloween", "cat", "groogle", "elephant", "fred", "banana", "dogecoin", "apple"]],["g","e"], ["d","n"]]
-
 */
