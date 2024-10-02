@@ -12,17 +12,13 @@ https://leetcode.com/problems/recover-binary-search-tree/
  * }
  */
 
-
+// Accepted
+// ~17ms, faster than 5.15%
+// 40.4 mb, less than 80.77%
 class Solution {
-    
-    // Accepted
-    // ~17ms, faster than 5.15%
-    // 40.4 mb, less than 80.77%
-    
     ArrayList<Integer> almostSorted = new ArrayList<>();
     TreeNode first;
     TreeNode second;
-    
     
     public void recoverTree(TreeNode root) {
       // create almost sorted array
@@ -56,22 +52,15 @@ class Solution {
               }
           }
       }
-      
-//    System.out.println("misplaced: " +Arrays.toString(misplaced) + "\nalmostSorted: " + almostSorted);
-//    System.out.println(first + " " + second);
-//    System.out.println("**********");
         
       // travel to the misplaced numbers, and swap
       travel(root, misplaced[0], true);
       travel(root, misplaced[1], false);
         
-        System.out.println(first + " " + second);
-        
       // swap
       int temp = first.val;
       first.val = second.val;
       second.val = temp;
-        
     }
     
     public void travel(TreeNode root, int misplaced, boolean firstOrSecond) // firstOrSecond = true, means its searching first
@@ -105,7 +94,7 @@ class Solution {
     public void inOrder(TreeNode root)
     {
         if(root == null)
-          return;
+            return;
         else
         {
             inOrder(root.left);
