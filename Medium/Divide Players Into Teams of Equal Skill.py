@@ -1,3 +1,5 @@
+# https://leetcode.com/problems/divide-players-into-teams-of-equal-skill/description/?envType=daily-question&envId=2024-10-04
+
 '''
 TC: O(N log N)
 SC: only dependent on sorting algorithm, so O(N) or O(logN) I believe
