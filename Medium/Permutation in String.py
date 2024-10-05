@@ -14,12 +14,11 @@ class Solution:
                 # Try to form a window that is a permutation
                 window[new_char] = window.get(new_char, 0) + 1
                 while window[new_char] > s_count[new_char]:
-                    # If too many of letter c, remove letters until same number of cs
-                    lc = long_word[l]
-                    window[lc] -= 1
-                    if window[lc] == 0:
-                        del window[lc]
-                        # break
+                    # If too many of new_char, remove leftmost letters until there are same number of new_char
+                    left_char = long_word[l]
+                    window[left_char] -= 1
+                    if window[left_char] == 0:
+                        del window[left_char]
                     l += 1
                 if window == s_count:
                     # If all counts match exactly, this is a permutation
