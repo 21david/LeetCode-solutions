@@ -1,10 +1,9 @@
 //  https://leetcode.com/problems/sudoku-solver/
+// 7 ms, faster than 79.20%
+// 37 MB, less than 45.61%
 
 class Solution {
     public void solveSudoku(char[][] board) {
-        // 7 ms, faster than 79.20%
-        // 37 MB, less than 45.61%
-    	
     	solveSudokuHelp(board);
     }
     
@@ -22,7 +21,6 @@ class Solution {
     			// if its an open cell, try all nums
     			for(int i = 1; i <= 9; i++)
     			{
-    				
     				// if this num doesn't break the board
     				if(!breaksBoard(board, r, c, i))
     				{
@@ -45,6 +43,7 @@ class Solution {
     private boolean breaksBoard(char[][] board, int r, int c, int n)
     {
     	char num = (char) (n + '0');
+
     	// if num is already present in the row, col, or subgrid, then it breaks the board
     	
     	// check the row
@@ -69,7 +68,6 @@ class Solution {
     				return true;
     		}
     	}
-    	
     	
     	return false;
     }
