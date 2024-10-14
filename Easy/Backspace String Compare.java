@@ -3,13 +3,11 @@ https://leetcode.com/problems/backspace-string-compare/
 */
 
 // LeetCode 30 day challenge, day 9
-
+// Accepted
+// 3 ms, faster than 15.19%
+// 37.8 mb, less than 6.06%
 class Solution {
     public boolean backspaceCompare(String S, String T) {
-        // Accepted
-        // 3 ms, faster than 15.19%
-        // 37.8 mb, less than 6.06%
-        
         StringBuilder sb1 = new StringBuilder();
         StringBuilder sb2 = new StringBuilder();
         
@@ -54,9 +52,6 @@ class Solution {
             
             j++;
         }
-        
-        System.out.println(sb1);
-        System.out.println(sb2);
         
         return sb1.toString().equals(sb2.toString());
     }
