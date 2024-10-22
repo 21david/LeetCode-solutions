@@ -1,21 +1,18 @@
-//  https://leetcode.com/problems/trapping-rain-water/
+/*
+https://leetcode.com/problems/trapping-rain-water/
 
+I think if we have an array that stores the highest elevation to 
+the right of every index, and another array that stores the
+highest elevation to the left of every index, we can use the 
+three arrays to compute how much water is in each index.
+All of these iterations would be O(N).
+
+1 ms, faster than 83.80%
+38.9 mb, less than 20.43%
+Solved in 18 minutes (watched a solution video)
+*/
 class Solution {
     public int trap(int[] height) {
-        // 1 ms, faster than 83.80%
-        // 38.9 mb, less than 20.43%
-        // Solved in 18 minutes (watched a solution video)
-        
-        /*
-        
-        I think if we have an array that stores the highest elevation to 
-        the right of every index, and another array that stores the
-        highest elevation to the left of every index, we can use the 
-        three arrays to compute how much water is in each index.
-        All of these iterations would be O(N).
-        
-        */
-        
         if(height.length <= 2)
             return 0;
         
