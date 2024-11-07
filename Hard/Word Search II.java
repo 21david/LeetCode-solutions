@@ -1,14 +1,10 @@
 /*
 https://leetcode.com/problems/word-search-ii/
-*/
 
-/*
 46 ms, faster than 39.27%
 61.6 mb, less than 5.04%
 */
-
 class Solution {
-	
 	public HashSet<String> wordsSet = new HashSet<>();
 
 	public List<String> findWords(char[][] board, String[] words) 
@@ -71,7 +67,6 @@ class Solution {
 		return answer;
 	}
 
-
 	/*
 	Search the matrix recursively in all 4 directions, starting at (r, c)
 	If a word is found, add it to foundWords
@@ -114,10 +109,7 @@ class Solution {
 		return r < 0 || c < 0 || r >= board.length || c >= board[0].length;
 	}
 
-
-
 	class TrieNode {
-
 		TrieNode[] children;
 		boolean endOfWord;
 
@@ -137,12 +129,9 @@ class Solution {
 		}
 	}
 
-
-
 	class Trie 
 	{
 		static final int ALPHABET = 26; // total # number of characters
-
 		TrieNode root;
 
 		/** Initialize your data structure here. */
@@ -173,11 +162,9 @@ class Solution {
 
 		/** Returns if the word is in the trie. */
 		public boolean search(String word) {
-
 			// we have to navigate through the trie using 'word'
 			// if we end up at a node that has endOfWord == true,
 			// then 'word' is in the true (return true)
-
 			TrieNode curNode = root;
 
 			for(int i = 0; i < word.length(); i++)
@@ -195,9 +182,7 @@ class Solution {
 
 		/** Returns if there is any word in the trie that starts with the given prefix. */
 		public boolean startsWith(String prefix) {
-
 			// similar to search(), but endOfWord in the last node doesn't have to be 'true' in this case
-
 			TrieNode curNode = root;
 
 			for(int i = 0; i < prefix.length(); i++)
@@ -213,5 +198,4 @@ class Solution {
 			return true;
 		}
 	}
-
 }
