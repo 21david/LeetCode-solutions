@@ -4,7 +4,6 @@ https://leetcode.com/problems/valid-number/
 
 class Solution {
     public boolean isNumber(String s) {
-        
         boolean isValid = false;
         
         s = s.trim(); // trim extra spaces at the beginning and end of the string
@@ -13,13 +12,11 @@ class Solution {
         if(s.length() == 0 || s.charAt(s.length() - 1) == 'e')
             return false;
         
-        
         // check for an 'e'
         String[] splitE = s.split("e");
         
         // if there is an e present, the array should be size 2
         // if there isn't, the array should be size 1
-        
         if(splitE.length == 2)
         {
             isValid = validLeft(splitE[0]) && validRight(splitE[1]);
@@ -34,7 +31,6 @@ class Solution {
         }
         
         return isValid;
-        
     }
     
     // basically only accept if its a valid double
@@ -61,7 +57,7 @@ class Solution {
         str = str.replace("d","x");
         str = str.replace("D", "x");
         
-        try{
+        try {
             Double.parseDouble(str);
             return true;
         }
@@ -82,7 +78,7 @@ class Solution {
     // -16
     public boolean validRight(String str)
     {
-        try{
+        try {
             Long.parseLong(str);
             return true;
         }
