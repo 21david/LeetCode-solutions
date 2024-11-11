@@ -1,4 +1,6 @@
 # https://leetcode.com/problems/queries-quality-and-percentage
+
+# Calculate the 'quality' column
 with avg_quality_table as (
     select 
         query_name,
@@ -6,6 +8,7 @@ with avg_quality_table as (
     from queries
     group by query_name
 ),
+# Calculate the 'poor_query_percentage' column
 poor_query_percentage_table as (
     with totals as (
         select
@@ -22,6 +25,7 @@ poor_query_percentage_table as (
     where rating < 3
     group by poor.query_name
 )
+# Join them together, handling null values
 select a.query_name, a.quality, ifnull(q.poor_query_percentage, 0) as poor_query_percentage 
 from avg_quality_table a
 left join poor_query_percentage_table q on q.query_name = a.query_name
