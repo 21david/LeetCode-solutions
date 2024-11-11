@@ -4,7 +4,7 @@ class Solution:
     def minimumSubarrayLength(self, nums: List[int], k: int) -> int:
         if k == 0: return 1
         
-        wdw = defaultdict(int)
+        window = defaultdict(int)
         curr_val = 0
 
         def add(num):
@@ -12,9 +12,9 @@ class Solution:
             pos = 0  # bit position
             while num:
                 if num & 1:
-                    if wdw[pos] == 0:
+                    if window[pos] == 0:
                         curr_val += 1 << pos
-                    wdw[pos] += 1
+                    window[pos] += 1
                 pos += 1
                 num >>= 1
 
@@ -23,9 +23,9 @@ class Solution:
             pos = 0  # bit position
             while num:
                 if num & 1:
-                    if wdw[pos] == 1:
+                    if window[pos] == 1:
                         curr_val -= 1 << pos
-                    wdw[pos] -= 1
+                    window[pos] -= 1
                 pos += 1
                 num >>= 1
 
@@ -44,5 +44,3 @@ class Solution:
                     break
 
         return ans if type(ans) == int else -1
-
-
