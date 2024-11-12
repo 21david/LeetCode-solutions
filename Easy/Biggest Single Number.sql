@@ -13,6 +13,7 @@ select max(num) as num
 from singles
 
 
+    
 # Another approach
 # Get all single numbers
 select num
