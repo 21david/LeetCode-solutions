@@ -30,3 +30,24 @@ select a.query_name, a.quality, ifnull(q.poor_query_percentage, 0) as poor_query
 from avg_quality_table a
 left join poor_query_percentage_table q on q.query_name = a.query_name
 where a.query_name is not null
+
+
+# My solution after seeing other solutions
+select
+    query_name, 
+    round(
+        avg(rating / position), 
+        2
+    ) as quality,
+    round(
+        sum(
+            case 
+                when rating < 3 then 1
+                else 0
+            end
+        ) / count(rating) * 100, 
+        2
+    ) as poor_query_percentage
+from queries
+where query_name is not null
+group by query_name
