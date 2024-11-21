@@ -3,7 +3,7 @@ class Solution:
         grid = [[0] * n for _ in range(m)]
         available = m * n
 
-        # Set guards and walls to true
+        # Set guards and walls to -1
         for r, c in guards + walls:
             grid[r][c] = -1
             available -= 1
