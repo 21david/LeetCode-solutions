@@ -1,24 +1,22 @@
 //  https://leetcode.com/problems/count-binary-substrings/
 
+/*
+Inspired by the solution:
+Turn the input string into an array of ints, where each int
+in the array represents the length of a substring of consecutive 1s or 0s.
+So "000110000001111111111" would become [3, 2, 6, 10]
+After this, for every pair of adjacent ints in the array, we can
+determine how many substrings we can count. For example, 
+with 3 and 2, we know it will be "11100" or "00111", and in both
+cases, we can form 2 substrings (which is min(3, 2)). So for all pairs,
+we add min(arr[i], arr[i+1]) to a counter variable, and return
+the value of that variable at the end.    
+
+10 ms, faster than 20.55%
+39.6 mb, less than 12.32%
+*/
 class Solution {
-    
     public int countBinarySubstrings(String s) {
-        // 10 ms, faster than 20.55%
-        // 39.6 mb, less than 12.32%
-        
-        /*
-        Inspired by the solution:
-        Turn the input string into an array of ints, where each int
-        in the array represents the length of a substring of consecutive 1s or 0s.
-        So "000110000001111111111" would become [3, 2, 6, 10]
-        After this, for every pair of adjacent ints in the array, we can
-        determine how many substrings we can count. For example, 
-        with 3 and 2, we know it will be "11100" or "00111", and in both
-        cases, we can form 2 substrings (which is min(3, 2)). So for all pairs,
-        we add min(arr[i], arr[i+1]) to a counter variable, and return
-        the value of that variable at the end.    
-        */
-        
         ArrayList<Integer> array = new ArrayList<>();
         
         char num = s.charAt(0);
@@ -58,27 +56,25 @@ class Solution {
         return count;
     }
     
-    
-    public int countBinarySubstrings2(String s) {
-        // 19 ms, faster than 5.58%
-        // 40 mb, less than 7.16%
-        // Solved in 32 minutes 30 seconds
-        
-        /*
-        A brute force approach would be to check all substrings of size 2, then size 3,
-        until the subtring reaches the size of the whole string. I think this would be
-        O(N^2) complexity, which would probably not pass the time limit.
-        
-        Another approach would be to check all substrings of size 2, and when a substring
-        that matches the pattern is found, store the index of that substring somewhere.
-        Once the whole string is iterated through, we should have a list of all the size 2
-        substrings that match, and any other substrings that match will start from these.
-        So, for each substring of size 2, we can try to expand as much as we can, counting any
-        new substrings that we find. Once we've tried all the substrings, we should have
-        a count of all the substrings (of all sizes) that match the pattern in the description.
-        
-        */
-        
+
+/*
+A brute force approach would be to check all substrings of size 2, then size 3,
+until the subtring reaches the size of the whole string. I think this would be
+O(N^2) complexity, which would probably not pass the time limit.
+
+Another approach would be to check all substrings of size 2, and when a substring
+that matches the pattern is found, store the index of that substring somewhere.
+Once the whole string is iterated through, we should have a list of all the size 2
+substrings that match, and any other substrings that match will start from these.
+So, for each substring of size 2, we can try to expand as much as we can, counting any
+new substrings that we find. Once we've tried all the substrings, we should have
+a count of all the substrings (of all sizes) that match the pattern in the description.
+
+19 ms, faster than 5.58%
+40 mb, less than 7.16%
+Solved in 32 minutes 30 seconds
+*/
+public int countBinarySubstrings2(String s) {
         ArrayList<Integer> indices = new ArrayList<>();
         
         // iterate through string, finding substrings of size 2 that look like "01" or "10"
@@ -87,10 +83,8 @@ class Solution {
                 indices.add(i);
         }
         
-        
         // any substring that we already found will count towards the solution
         int count = indices.size();
-        
         
         // now we have to try to expand from the ones we found to find bigger ones
         int rightIndex;
@@ -107,7 +101,7 @@ class Solution {
 
             // while both pointers are still within bound
             while(leftIndex >= 0 && rightIndex < s.length()) {
-                
+
                 if(s.charAt(leftIndex) == leftNum && s.charAt(rightIndex) == rightNum)  // if still a match
                     count++;
                 else
