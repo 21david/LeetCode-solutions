@@ -12,6 +12,9 @@ always doing it until the end of the array.
 
 Solved after reading this solution:
 httprefix_sum://leetcode.com/problems/maximum-subarray-sum-with-length-divisible-by-k/solutions/6124522/prefix-sum-kadane/
+
+TC: O(N)
+SC: O(N)
 """
 class Solution:
     def maxSubarraySum(self, nums: List[int], k: int) -> int:
