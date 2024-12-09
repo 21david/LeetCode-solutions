@@ -68,3 +68,31 @@ Test cases:
 [[1,3,2],[1000000000,1000000000,10]]
 [[2,1000000000,1000000],[1,1,1000000]]
 '''
+
+
+# Solution 2:
+# After reading Greedy approach in editorial, except the code
+# TC: O(NlogN) for sorting
+# SC: O(N) for the timeline array and for sorting in Python
+class Solution:
+    def maxTwoEvents(self, events: List[List[int]]) -> int:
+        timeline = []
+        for ev_st, ev_end, val in events:
+            timeline.append((ev_st, True, val))
+            timeline.append((ev_end + 1, False, val))  # Add 1 due to the inclusive constraint
+
+        # Sort by time (first element), and sort end times before start times for ties
+        timeline.sort(key = lambda ele: (ele[0], ele[1]))
+
+        maxVal = 0  # previous max value of a single event that already ended
+        maxOverall = 0  # max value of any single or pair of events 
+
+        for time, is_start, val in timeline:
+            if is_start:
+                # Try adding previous maxVal
+                maxOverall = max(maxOverall, val + maxVal)
+            else:
+                # Update maxVal if its a new max
+                maxVal = max(maxVal, val)
+
+        return maxOverall
