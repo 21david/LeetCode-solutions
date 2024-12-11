@@ -31,16 +31,12 @@ class Solution:
         # possible is actually the celebrity by checking all his incoming and outgoing
         # edges
         
-        if all(
-            i == possible or not knows(possible, i) 
-            for i in range(n)
-            ) and all(
-                knows(i, possible)
-                for i in range(n)
-            ):
-            return possible
-        else:
-            return -1
+        return possible if all(
+                not knows(possible, i)  # celebrity doesn't know anyone
+                and knows(i, possible)  # everyone knows celebrity
+                for i in range(n) if i != possible
+            ) else -1
+
 
 
         
