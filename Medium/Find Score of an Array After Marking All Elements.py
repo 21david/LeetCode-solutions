@@ -76,3 +76,73 @@ class Solution:
                     nums[idx + 1] = None
 
         return answer
+
+
+
+'''
+After seeing other O(N) solutions.
+One-pass greedy approach. Think of the array as several strictly increasing and
+decreasing subarrays put together.
+
+For the increasing arrays, we can greedily pick the first element in it
+and then every other element. Because the first element will be smaller
+than the one before and after it, so it will be guaranteed to be part of
+the answer (or if its the first element in the whole array).
+
+For the decreasing arrays, we can put them in a stack as we traverse. When
+we find the first element that is not strictly decreasing (that is >=), 
+then we know that the element right before that is a local minimum (less than
+both its neighbors), and therefore needs to be part of the answer. If we 
+elimnate that one, then the one right before it gets eliminated also, and the
+one before that one will be the next minimum, because it has a greater element
+to its left and a cancelled element to its right. So it needs to be part of
+the answer and we add it. Since the array is strictly decreasing, this just
+repeats for every other element every time, going backwards. We essentially do
+the same thing we did for the increasing arrays, but backwards.
+
+After processing all numbers, there may be some still in the stack, so we process
+those and return the final answer.
+
+TC: O(N). One pass through the array.
+SC: O(N). For the stack.
+'''
+class Solution:
+    def findScore(self, nums: List[int]) -> int:
+        st = []
+        ans = 0
+        N = len(nums)
+        i = 0
+        for i in range(N):
+            if not st:
+                st.append(nums[i])
+            else:
+                if nums[i] >= st[-1]:
+                    # End of non-increasing subarray
+                    while st:
+                        ans += st[-1]
+                        st.pop()
+                        if st:
+                            st.pop()  # Skip prev num as it will be marked
+                    
+                else:
+                    st.append(nums[i])
+
+        # Remaning numbers in stack
+        while st:
+            ans += st[-1]
+            st.pop()
+            if st:
+                st.pop()  # Skip prev num as it will be marked
+
+        return ans
+
+'''
+Test cases:
+[2,1,3,4,5,2]
+[2,3,5,1,3,2]
+[9,8,7,11,10,9,8,9,8,7]
+[2,2,2,3,3,5,5,1,1,1,1,2,2,3,5,5,4,4,4,4,2,2,3,3,3]
+[1,2,3,4,5,4,3,2,1,2,3,4,5,3,2]
+[5,10,5,10,5,10,5,10]
+[1,3,1,3,5,3,2,4]
+'''
