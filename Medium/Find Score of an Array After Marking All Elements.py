@@ -119,7 +119,7 @@ class Solution:
                 stack.append(nums[i])
             else:
                 if nums[i] >= stack[-1]:
-                    # End of non-increasing subarray
+                    # End of decreasing subarray
                     while stack:
                         total += stack[-1]
                         stack.pop()
