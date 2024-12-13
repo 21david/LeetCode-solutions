@@ -141,7 +141,8 @@ Optimization:
 We can use two pointers to find the bounds of the decreasing arays instead of using
 a stack. When we find it, we can create a third pointer and traverse backwards,
 adding only every other element. If we just worry about decreasing arrays, then
-increasing arrays will automatically be processes like in the approach above.
+increasing arrays will automatically be processes like in the approach above,
+because increasing arrays consist of many single-element 'decreasing' arrays.
 
 TC: O(N). One pass through the array.
 SC: O(1) for the pointers.
