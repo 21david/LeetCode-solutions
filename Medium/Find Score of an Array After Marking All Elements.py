@@ -114,19 +114,16 @@ class Solution:
         N = len(nums)
         stack = []
         total = 0
-        for i in range(N):
-            if not stack:
-                stack.append(nums[i])
+        for num in nums:
+            if not stack or num < stack[-1]:
+                stack.append(num)
             else:
-                if nums[i] >= stack[-1]:
-                    # End of decreasing subarray
-                    while stack:
-                        total += stack[-1]
-                        stack.pop()
-                        if stack:
-                            stack.pop()  # Skip prev num as it will be marked
-                else:
-                    stack.append(nums[i])
+                # End of non-increasing subarray
+                while stack:
+                    total += stack[-1]
+                    stack.pop()
+                    if stack:
+                        stack.pop()  # Skip prev num as it will be marked
 
         # Remaning numbers in stack
         while stack:
@@ -136,6 +133,7 @@ class Solution:
                 stack.pop()  # Skip prev num as it will be marked
 
         return total
+
 
 
 '''
