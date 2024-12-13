@@ -103,34 +103,30 @@ the answer and we add it. Since the array is strictly decreasing, this just
 repeats for every other element every time. We essentially do the same thing 
 we did for the increasing arrays, but backwards.
 
-After processing all numbers, there may be some still in the stack, so we process
-those and return the final answer.
-
 TC: O(N). One pass through the array.
 SC: O(N). For the stack.
 '''
 class Solution:
     def findScore(self, nums: List[int]) -> int:
+        # This dummy node lets us process the numbers in the last decreasing
+        # subarray without writing a separate loop
+        nums.append(math.inf)
+
         N = len(nums)
         stack = []
         total = 0
         for num in nums:
             if not stack or num < stack[-1]:
+                # Continue building a decreasing subarray
                 stack.append(num)
             else:
-                # End of decreasing subarray
+                # End of decreasing subarray:
+                # Add the local minimum and the new minimums before it
                 while stack:
                     total += stack[-1]
                     stack.pop()
                     if stack:
                         stack.pop()  # Skip prev num as it will be marked
-
-        # Remaning numbers in stack
-        while stack:
-            total += stack[-1]
-            stack.pop()
-            if stack:
-                stack.pop()  # Skip prev num as it will be marked
 
         return total
 
