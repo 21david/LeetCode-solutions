@@ -40,6 +40,15 @@ class Solution:
 
         return answer
 
+class Node:
+    def __init__(self, v, p = None, n = None):
+        self.val = v
+        self.prev = p
+        self.next = n
+
+    def __repr__(self):
+        return f'{self.prev.val if self.prev else "X"}<-{self.val}->{self.next.val if self.next else "X"}'
+
 
 
 '''
