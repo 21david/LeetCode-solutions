@@ -118,7 +118,7 @@ class Solution:
             if not stack or num < stack[-1]:
                 stack.append(num)
             else:
-                # End of non-increasing subarray
+                # End of decreasing subarray
                 while stack:
                     total += stack[-1]
                     stack.pop()
