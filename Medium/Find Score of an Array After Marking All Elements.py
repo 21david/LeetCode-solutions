@@ -137,6 +137,36 @@ class Solution:
 
         return total
 
+
+'''
+Optimization:
+We can use two pointers to find the bounds of the decreasing arays instead of using
+a stack. When we find it, we can create a third pointer and traverse backwards,
+adding only every other element. If we just worry about decreasing arrays, then
+increasing arrays will automatically be processes like in the approach above.
+
+TC: O(N). One pass through the array.
+SC: O(1) for the pointers.
+'''
+class Solution:
+    def findScore(self, nums: List[int]) -> int:
+        nums.append(math.inf)  # Dummy node to process last window within the loop
+        N = len(nums)
+        total = 0
+        l = 0
+        for r in range(N):
+            if l != r and nums[r] >= nums[r - 1]:
+                # End of decreasing subarray
+                j = r - 1  # put j on the local minimum
+                while j >= l:
+                    # Add every other element
+                    total += nums[j]
+                    j -= 2
+                # Move the window
+                l = r + 1
+
+        return total
+
 '''
 Test cases:
 [2,1,3,4,5,2]
