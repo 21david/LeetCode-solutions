@@ -39,3 +39,31 @@ class Solution:
                 node.next.val = None
 
         return answer
+
+
+
+'''
+After seeing solution 1 explanation in editorial
+
+TC: O(NlogN) for sorting
+SC: O(N) for the auxiliary arrays
+'''
+class Solution:
+    def findScore(self, nums: List[int]) -> int:
+        # Sort
+        nums_with_indices = [[num, idx] for idx, num in enumerate(nums)]
+        nums_with_indices.sort()
+
+        answer = 0
+        for num, idx in nums_with_indices:
+            if nums[idx] is not None:
+                answer += num
+
+                # Mark neighbors
+                if idx - 1 >= 0:
+                    nums[idx - 1] = None
+
+                if idx + 1 < len(nums):
+                    nums[idx + 1] = None
+
+        return answer
