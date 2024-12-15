@@ -1,12 +1,12 @@
 '''
-https://leetcode.com/problems/maximum-average-pass-ratio
-
 After seeing all hints
 
-TC: O(E log C)
-SC: O(C)
+TC: O(E log N + N). 
+    O(N) for building the changes array and heapifying it. 
+    O(E log N) for distributing students.
+SC: O(N) for the heap
 E = extraStudents
-C = number of classes
+N = number of classes
 '''
 from heapq import heapify, heappop as pop, heappush as push
 class Solution:
