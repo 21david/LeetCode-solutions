@@ -36,3 +36,37 @@ class Solution:
             return res
 
         return find_cheapest(0)
+
+"""
+Bottom up dynamic programming solution:
+Start by finding the answer for the last day, which is easy because it's right by the
+base case. Then work your way backwards similar how to the recursion tree would do it.
+TC: O(N)
+SC: O(N)
+
+Written before seeing NeetCode's bottom up solution.
+"""
+class Solution:
+    def mincostTickets(self, days: List[int], costs: List[int]) -> int:
+        D = len(days)
+        dp = [0] * (D + 1)
+
+        for idx in range(D - 1, -1, -1):
+            res = math.inf
+            j = idx + 1
+            
+            while j < D and days[j] < days[idx] + 1:
+                j += 1
+            option1 = costs[0] + dp[j]
+
+            while j < D and days[j] < days[idx] + 7:
+                j += 1
+            option2 = costs[1] + dp[j]
+
+            while j < D and days[j] < days[idx] + 30:
+                j += 1
+            option3 = costs[2] + dp[j]
+
+            dp[idx] = min(option1, option2, option3)
+
+        return dp[0]
