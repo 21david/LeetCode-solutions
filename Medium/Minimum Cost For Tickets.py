@@ -37,6 +37,8 @@ class Solution:
 
         return find_cheapest(0)
 
+
+
 """
 Bottom up dynamic programming solution:
 Start by finding the answer for the last day, which is easy because it's right by the
@@ -68,5 +70,29 @@ class Solution:
             option3 = costs[2] + dp[j]
 
             dp[idx] = min(option1, option2, option3)
+
+        return dp[0]
+
+
+
+"""
+Same bottom up solution as above, but written with a loop.
+It looks very similar to the top-down solution.
+
+Written before seeing NeetCode's bottom up solution.
+"""
+class Solution:
+    def mincostTickets(self, days: List[int], costs: List[int]) -> int:
+        D = len(days)
+        dp = [0] * (D + 1)
+
+        for idx in range(D - 1, -1, -1):
+            res = math.inf
+            j = idx + 1
+            for cost, dur in zip(costs, [1, 7, 30]):
+                while j < D and days[j] < days[idx] + dur:
+                    j += 1
+                res = min(res, cost + dp[j])
+            dp[idx] = res
 
         return dp[0]
