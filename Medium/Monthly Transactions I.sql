@@ -31,3 +31,16 @@ select
 from original
 left join approved
 on original.country = approved.country and original.month = approved.month
+
+
+
+# After seeing other's solutions:
+select
+    left(trans_date, 7) as month,
+    country,
+    count(id) as trans_count,
+    sum(state = 'approved') as approved_count,  -- alternatively, sum(case when state = 'approved' then 1 else 0 end)
+    sum(amount) as trans_total_amount,
+    sum((state = 'approved') * amount) as approved_total_amount  -- alternatively, sum(case when state = 'approved' then amount else 0 end) as approved_total_amount
+from transactions
+group by country, month
