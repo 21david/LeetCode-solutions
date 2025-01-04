@@ -1,4 +1,4 @@
-with app as (
+with approved as (
     select 
         ifnull(country, 'null') as country,   -- 'null' string workaround to count nulls
         left(trans_date, 7) as month, 
@@ -8,7 +8,7 @@ with app as (
     where state = 'approved'
     group by country, month
 ), 
-orig as (
+original as (
     select 
         ifnull(country, 'null') as country, 
         left(trans_date, 7) as month, 
@@ -18,16 +18,16 @@ orig as (
     group by country, month
 )
 select 
-    orig.month, 
+    original.month, 
     case 
         -- Undo the 'null' string workaround
-        when orig.country = 'null' then null 
-        else orig.country 
+        when original.country = 'null' then null 
+        else original.country 
     end as country, 
     trans_count,
     ifnull(approved_count, 0) as approved_count,
     trans_total_amount,
     ifnull(approved_total_amount, 0) as approved_total_amount
-from orig
-left join app
-on orig.country = app.country and orig.month = app.month
+from original
+left join approved
+on original.country = approved.country and original.month = approved.month
