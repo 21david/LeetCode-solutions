@@ -30,3 +30,41 @@ class Solution:
                 right_index_sum -= i
                 
         return ans
+
+
+
+'''
+Simpler approach after seeing the editorial:
+Do a left to right pass to calculate the number of moves to move each ball to each 
+position to its right.
+Then a right to left pass to calculate the number of moves to move each ball to
+each position to its left.
+Each pass can be done with two variables. One tracks the number of 1s we've passed,
+the other is used to calculate the number of moves to move all those 1s, which is
+calculated by adding the value of the first variable to it in each iteration.
+
+TC: O(N)
+Auxiliary SC: O(1)
+'''
+class Solution:
+    def minOperations(self, boxes: str) -> List[int]:
+        N = len(boxes)
+        answer = [0] * N
+
+        # Left to right pass
+        passed_ones = 0
+        moves_required = 0
+        for i in range(N):
+            moves_required += passed_ones
+            answer[i] += moves_required
+            passed_ones += boxes[i] == '1'
+
+        # Right to left pass
+        passed_ones = 0
+        moves_required = 0
+        for i in range(N - 1, -1, -1):
+            moves_required += passed_ones
+            answer[i] += moves_required
+            passed_ones += boxes[i] == '1'
+
+        return answer
