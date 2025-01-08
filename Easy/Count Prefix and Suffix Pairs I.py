@@ -1,7 +1,7 @@
 '''
 Brute force approach
 
-TC: O(N^3)
+TC: O(N^2 * M). N is the number of words, M is the average length of the words.
 SC: O(1)
 '''
 class Solution:
