@@ -1,3 +1,9 @@
+'''
+Brute force approach
+
+TC: O(N^3)
+SC: O(1)
+'''
 class Solution:
     def countPrefixSuffixPairs(self, words: List[str]) -> int:
         def is_prefix_and_suffix(a, b):
@@ -10,3 +16,16 @@ class Solution:
                 count += is_prefix_and_suffix(words[i], words[j])
 
         return count
+
+
+'''
+Same approach in two statements
+'''
+class Solution:
+    def countPrefixSuffixPairs(self, words: List[str]) -> int:
+        N = len(words)
+        return sum(
+            words[j].startswith(words[i]) and words[j].endswith(words[i])
+            for i in range(N-1)
+            for j in range(i+1, N)
+        )
