@@ -20,9 +20,13 @@ SC: O(1), the hash map will only grow to a size of 26 at the most.
 class Solution:
     def canConstruct(self, s: str, k: int) -> bool:
         if k > len(s): return False
-        
-        freqs = Counter(s)
-
-        odds = sum(value % 2 == 1 for key, value in freqs.items())
-
+        frequencies = Counter(s)
+        odds = sum(frequency % 2 == 1 for letter, frequency in frequencies.items())
         return odds <= k
+
+
+
+# Same solution in one line
+class Solution:
+    def canConstruct(self, s: str, k: int) -> bool:
+        return k <= len(s) and sum(frequency % 2 == 1 for letter, frequency in Counter(s).items()) <= k
