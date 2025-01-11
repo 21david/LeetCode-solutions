@@ -15,7 +15,7 @@ Count how many frequencies are odd.
 Compare that with k and return the result.
 
 TC: O(N) to count frequencies with a hashmap, and to count odd frequencies
-SC: O(N) for the hash map to count frequencies
+SC: O(1), the hash map will only grow to a size of 26 at the most.
 '''
 class Solution:
     def canConstruct(self, s: str, k: int) -> bool:
