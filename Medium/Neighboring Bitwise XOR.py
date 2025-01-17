@@ -1,5 +1,8 @@
 '''
 After seeing NeetCode's solution video except the code
+
+TC: O(N)
+SC: O(1)
 '''
 class Solution:
     def doesValidArrayExist(self, derived: List[int]) -> bool:
