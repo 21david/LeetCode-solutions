@@ -41,3 +41,27 @@ select
     seller_id
 from ranked_sellers
 where rnk = 1
+
+
+
+/*
+After seeing the optimal solution:
+1. Aggregate sellers and their totals
+2. Get the maximum total
+3. Get the seller(s) with this maximum total
+*/
+with seller_totals as (
+    select 
+        seller_id,
+        sum(price) as total
+    from sales
+    group by 1
+)
+select
+    seller_id
+from seller_totals
+where total = (
+    # Find max total
+    select max(total)
+    from seller_totals
+)
