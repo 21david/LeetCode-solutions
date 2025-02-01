@@ -1,20 +1,10 @@
 # using window function
-with accs as (
+with accumulated_sums_table as (
     select
-        seller_id, price,
-        sum(price) over (partition by seller_id) as acc_s
-    from (
-        select seller_id, price
-        from sales s
-        left join product p
-        on s.product_id = p.product_id
-    ) t
-    order by price desc
-)
-select 
-    distinct seller_id
-from accs
-where acc_s = (
-    -- the sum of all sales of the best seller(s)
-    select max(acc_s) from accs
-)
+        seller_id,
+        sum(price) over (partition by seller_id) as acc
+    from sales
+) 
+select distinct seller_id
+from accumulated_sums_table
+where acc = (select max(acc) from accumulated_sums_table)
