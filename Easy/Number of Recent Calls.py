@@ -1,8 +1,8 @@
 class RecentCounter:
-
     def __init__(self):
         self.deque = deque()
 
+    # O(1) due to constant 3000 upper bound
     def ping(self, t: int) -> int:
         self.deque.append(t)
 
