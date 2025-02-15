@@ -1,3 +1,6 @@
+# See my LeetCode solution post -
+# https://leetcode.com/problems/find-the-punishment-number-of-an-integer/solutions/6423594/the-most-optimal-possible-solution-preco-l2oh/
+
 # Actual algorithm
 class Solution:
     def punishmentNumber(self, N: int) -> int:
