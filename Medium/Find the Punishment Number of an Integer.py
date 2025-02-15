@@ -40,3 +40,21 @@ class Solution:
             ans += num ** 2
 
         return ans
+
+
+'''
+Another solution would be to precompute the actual outputs for each input,
+and use a set of if-statements like
+if 1 <= n < 9:
+    return 1
+elif n == 9:
+    return 82
+elif 10 <= n < 36:
+    return 182
+elif 36 <= n < 45:
+    return 1478
+...
+
+This may be even faster than the solution above.
+'''
+
