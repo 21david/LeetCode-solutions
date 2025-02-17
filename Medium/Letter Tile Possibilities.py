@@ -5,7 +5,8 @@
 Permutations algorithm, which gets all permutations of all lengths of the string, 
 puts each one in a set, then returns the length of the set. 
 
-TC: O(N!)
+TC: O(N ⋅ N!)
+SC: O(N ⋅ N!)
 """
 class Solution:
     def numTilePossibilities(self, tiles: str) -> int:
