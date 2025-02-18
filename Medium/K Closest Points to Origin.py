@@ -105,7 +105,7 @@ class Solution:
             # Else, repeat on the left or the right depending on where k is.
             if lesserIdx <= k <= eqIdx:
                 return points[:k]
-            elif k-1 < lesserIdx:
+            elif k < lesserIdx:
                 right = lesserIdx - 1
             else:
                 left = eqIdx
