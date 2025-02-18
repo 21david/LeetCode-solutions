@@ -1,6 +1,6 @@
 """
 Quick select:
-The idea is to reorder the array such that pivot_dist is in its final
+The idea is to reorder the array such that the pivot is in its final
 place, which is the exact place it would be in if the array was sorted,
 and have all the elements before it be ≤ it, and all the elements after
 it be > it. We can know the closest k points only when the final index 
@@ -25,7 +25,7 @@ Time complexity:
     Average: O(N)
     Worst: O(N^2)
 
-Space complexity: O(1)
+Space complexity: O(N) due to recursion call stack
 """
 class Solution:
     def kClosest(self, points: List[List[int]], k: int) -> List[List[int]]:
@@ -58,3 +58,55 @@ class Solution:
         quick_select(0, len(points))
 
         return points[:k]
+
+
+
+"""
+Optimized quick select using three way partitioning from 75. Sort Colors
+
+Time complexity:
+    Average: O(N)
+    Worst: O(N^2)
+
+Space complexity: O(1)
+"""
+class Solution:
+    def kClosest(self, points: List[List[int]], k: int) -> List[List[int]]:
+        def get_dist(point):
+            return point[0] ** 2 + point[1] ** 2
+
+        # Quick select
+        left, right = 0, len(points) - 1
+        while True:
+            pivot_idx = random.randint(left, right)
+            pivot = points[pivot_idx]
+            pivot_dist = get_dist(pivot)
+
+            lesserIdx = left  # every element behind is > pivot
+            eqIdx = left  # every element after and including lesserIdx and behind eqIdx is = pivot
+
+            # Sorting algorithm from Sort Colors / Dutch National Flag problem
+            for i in range(left, right + 1):
+                dist = get_dist(points[i])
+                if dist < pivot_dist:
+                    temp = points[i]
+                    points[i] = points[eqIdx]
+                    points[eqIdx] = points[lesserIdx]
+                    points[lesserIdx] = temp
+                    lesserIdx += 1
+                    eqIdx += 1
+                elif dist == pivot_dist:
+                    points[i], points[eqIdx] = points[eqIdx], points[i]
+                    eqIdx += 1
+
+            # Elements at indices 'lesserIdx' to 'eqIdx - 1' are all = to pivot 
+            # and are in their final sorted positions. If k falls in this range
+            # then the answer is everything before index k. 
+            # Else, repeat on the left or the right depending on where k is.
+            if lesserIdx <= k <= eqIdx:
+                return points[:k]
+            elif k-1 < lesserIdx:
+                right = lesserIdx - 1
+            else:
+                left = eqIdx
+    
