@@ -6,6 +6,7 @@ https://leetcode.com/problems/the-k-th-lexicographical-string-of-all-happy-strin
 """  
 I solved this problem by just listing out each string in order for 
 n = 1, 2, 3, 4, and partialy 5.
+
 I saw a pattern:
 
 List of strings of length 1:
@@ -35,7 +36,7 @@ cac
 cba
 cbc
 
-List of 18 strings of length 4:
+List of 24 strings of length 4:
 abab
 abac
 abca
@@ -61,7 +62,7 @@ cbac
 cbca
 cbcb
 
-List of 24 strings of length 5:
+List of 48 strings of length 5:
 ababa
 ababc
 abaca
@@ -90,6 +91,9 @@ and the second group has the next lexicograpihcal letter after that. And those g
 and this repeats until the last letter.
 So this pattern led to the solution below.
 One of the hardest I've solved I think. 
+
+TC: O(N)
+SC: O(N)
 """
 class Solution:
     def getHappyString(self, n: int, k: int) -> str:
@@ -169,3 +173,36 @@ class Solution:
                         case 2:
                             return 'b'
                 
+
+
+
+"""
+Solution 2: Backtracking
+"""
+class Solution:
+    def getHappyString(self, n: int, k: int) -> str:
+        ans = [None] * n
+        found = 0
+        final_ans = None
+
+        def find(i):
+            nonlocal found, final_ans
+            if final_ans:
+                return
+
+            if i == n:
+                found += 1
+                if found == k:
+                    final_ans = ''.join(ans)
+                return 
+
+            for letter in ('a', 'b', 'c'):
+                if i == 0 or letter != ans[i - 1]:
+                    ans[i] = letter
+                    find(i + 1)
+
+        find(0)
+        return final_ans or ''
+
+
+# print(''.join(ans), found, 'yes' if found == k else '')  # line 15
