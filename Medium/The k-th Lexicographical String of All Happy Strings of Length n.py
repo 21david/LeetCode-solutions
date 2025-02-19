@@ -94,6 +94,7 @@ One of the hardest I've solved I think.
 
 TC: O(N)
 SC: O(N)
+Beats 100% of other solutions in time taken.
 """
 class Solution:
     def getHappyString(self, n: int, k: int) -> str:
