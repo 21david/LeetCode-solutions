@@ -4,7 +4,6 @@ class SnakeGame {
     private curR: number; 
     private curC: number;
     private foodIdx: number;
-    private score: number;
     private bodyQueue: Queue<[number, number]>;
     private bodySet: Set<String>;
 
@@ -13,7 +12,7 @@ class SnakeGame {
         private height: number, 
         private food: number[][]
     ) {
-        this.curR = this.curC = this.foodIdx = this.score = 0;
+        this.curR = this.curC = this.foodIdx = 0;
         this.bodyQueue = new Queue<[number, number]>();
         this.bodyQueue.push([0,0]);
         this.bodySet = new Set('0,0');
@@ -49,7 +48,6 @@ class SnakeGame {
         // Check if it ran into the current piece of food
         let ate = false;
         if ((this.foodIdx < this.food.length) && (this.curR === this.food[this.foodIdx][0]) && (this.curC === this.food[this.foodIdx][1])) {
-            this.score++;
             this.foodIdx++;
             ate = true;
         }
@@ -68,7 +66,7 @@ class SnakeGame {
         this.bodyQueue.push([this.curR, this.curC]);
         this.bodySet.add(`${this.curR},${this.curC}`);
         
-        return this.score;
+        return this.bodyQueue.size() - 1;
     }
 }
 
