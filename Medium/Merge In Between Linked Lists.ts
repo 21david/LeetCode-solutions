@@ -10,6 +10,17 @@
  * }
  */
 
+/*
+My proposed definition, sent to LeetCode for review:
+
+class ListNode {
+    constructor(
+        public val: number = 0,
+        public next: ListNode | null = null
+    )
+}
+*/
+
 function mergeInBetween(list1: ListNode | null, a: number, b: number, list2: ListNode | null): ListNode | null {
     b -= a;  // Trick for tempB to start from tempA to not repeat work, instead of starting from the start
 
