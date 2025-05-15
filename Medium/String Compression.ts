@@ -21,7 +21,6 @@ function compress(chars: string[]): number {
             } 
             
             cons = 1;
-
         }
     }
 
