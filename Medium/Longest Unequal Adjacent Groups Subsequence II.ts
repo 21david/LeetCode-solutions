@@ -10,8 +10,8 @@ TC = O(N^2 * M) where N = number of words, M = length of longest word
 Aux SC = O(N) for the arrays
 */
 function getWordsInLongestSubsequence(words: string[], groups: number[]): string[] {
-    let longestPathPoss = Array(words.length).fill(0);  // like a dp array?
-    let longestPathIdx = Array(words.length).fill(-1);  // store next idx so we can recreate the paths
+    const longestPathPoss = Array(words.length).fill(0);  // like a dp array?
+    const longestPathIdx = Array(words.length).fill(-1);  // store next idx so we can recreate the paths
 
     // To store the length of the longest chain of strings
     let maxOverall = 0;
@@ -45,7 +45,7 @@ function getWordsInLongestSubsequence(words: string[], groups: number[]): string
     }
 
     // Recreate (one of) the longest chain of words
-    let ans = [];
+    const ans = [];
     while (maxOverallIdx !== -1) {
         ans.push(words[maxOverallIdx]);
         maxOverallIdx = longestPathIdx[maxOverallIdx];
