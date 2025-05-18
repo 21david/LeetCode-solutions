@@ -15,6 +15,23 @@ function depthSum(nestedList: NestedInteger[]): number {
     return res;
 };
 
+/*  
+Drawing it like this helped me:
+
+[Int, List, Int]
+        |
+      [Int, List, Int]
+             |
+           [Int, Int]
+
+There should be a for loop checking the type of everything. 
+For ints, immediately add to the result, depth should be known. 
+For lists, it requires recursion with an increased depth.
+
+TC: O(N) where N is number of ints
+SC: O(D) where D is the max depth
+*/
+
 /**
  * // This is the interface that allows for creating nested lists.
  * // You should not implement it, or speculate about its implementation
