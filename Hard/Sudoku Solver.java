@@ -7,23 +7,17 @@ class Solution {
     	solveSudokuHelp(board);
     }
     
-    public boolean solveSudokuHelp(char[][] board)
-    {
+    public boolean solveSudokuHelp(char[][] board) {
     	// iterate through every cell
-    	for(int r = 0; r < 9; r++)
-    	{
-    		for(int c = 0; c < 9; c++)
-    		{
-                // skip if its a number
-    			if(board[r][c] != '.')
+    	for(int r = 0; r < 9; r++) {
+    		for(int c = 0; c < 9; c++) {
+    			if(board[r][c] != '.')  // skip if its a number
     				continue;
     			
     			// if its an open cell, try all nums
-    			for(int i = 1; i <= 9; i++)
-    			{
+    			for(int i = 1; i <= 9; i++) {
     				// if this num doesn't break the board
-    				if(!breaksBoard(board, r, c, i))
-    				{
+    				if(!breaksBoard(board, r, c, i)) {
     					board[r][c] = (char) ('0' + i);
                         
     					if(solveSudokuHelp(board))
@@ -40,11 +34,9 @@ class Solution {
     	return true;
     }
     
-    private boolean breaksBoard(char[][] board, int r, int c, int n)
-    {
+	// if num is already present in the row, col, or subgrid, then it breaks the board
+    private boolean breaksBoard(char[][] board, int r, int c, int n) {
     	char num = (char) (n + '0');
-
-    	// if num is already present in the row, col, or subgrid, then it breaks the board
     	
     	// check the row
     	for(int i = 0; i < 9; i++)
@@ -61,13 +53,9 @@ class Solution {
     	int subgridC = c / 3;
     	
     	for(int i = subgridR * 3; i < subgridR * 3 + 3; i++)
-    	{
     		for(int j = subgridC * 3; j < subgridC * 3 + 3; j++)
-    		{
     			if(board[i][j] == num)
     				return true;
-    		}
-    	}
     	
     	return false;
     }
