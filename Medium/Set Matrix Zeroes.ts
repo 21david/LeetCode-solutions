@@ -30,6 +30,10 @@ const setZeroes = (matrix: number[][]): void => {
                 }
             }
 
+    // Edit: These next two loops could be combined by just checking, for each cell
+    // if either their topmost cell or leftmost cell was set to 0, then that cell
+    // becomes 0. This would reduce them from two passes to one.
+    
     // Iterate left column and convert the rows that were set to 0
     for (let r = 1; r < R; r++)
         if (matrix[r][0] === 0)
