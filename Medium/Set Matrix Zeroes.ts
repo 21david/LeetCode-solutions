@@ -15,7 +15,7 @@ Solved after seeing hints 1-3 and skimming the solution code.
 */
 const setZeroes = (matrix: number[][]): void => {
     const [R, C] = [matrix.length, matrix[0].length];
-    let firstRow, firstCol;
+    let firstRow;
 
     // Iterate, for each 0 cell, set its top-most and left-most cells to 0
     // or firstRow/firstCol if they are in the first row and/or column.
@@ -24,39 +24,30 @@ const setZeroes = (matrix: number[][]): void => {
             if (matrix[r][c] === 0) {
                 if (r === 0) {
                     firstRow = true;
-                }
-                if (c === 0) {
-                    firstCol = true;
-                    continue;
-                }
-                if (r > 0 && c > 0) {
+                } else {
                     matrix[0][c] = 0;
                     matrix[r][0] = 0;
                 }
             }
 
-    // Iterate top row and convert the columns that were set to 0
-    for (let c = 1; c < C; c++)
-        if (matrix[0][c] === 0)
-            for (let r = 0; r < R; r++) 
-                matrix[r][c] = 0;
-
     // Iterate left column and convert the rows that were set to 0
     for (let r = 1; r < R; r++)
         if (matrix[r][0] === 0)
-            for (let c = 0; c < C; c++)
+            for (let c = 1; c < C; c++)
+                matrix[r][c] = 0;
+    
+    // Iterate top row and convert the columns that were set to 0
+    for (let c = 0; c < C; c++)
+        if (matrix[0][c] === 0)
+            for (let r = 1; r < R; r++) 
                 matrix[r][c] = 0;
 
     // Top-left cell is a special case because if it is 0, if we set that
     // column to 0, then all rows will be set to 0, and vice versa if we
     // do it in the opposite order. So we leave it alone and only set firstRow
-    // to true if the first row should be set to 0, and the same for firstCol
+    // to true if the first row should be set to 0. matrix[0][0] is used for column 0.
     if (firstRow)
         matrix[0] = Array(C).fill(0);
-
-    if (firstCol)
-        for (let r = 0; r < R; r++)
-            matrix[r][0] = 0;
 };
 
 /*  
@@ -66,7 +57,7 @@ Test case
  [0,10,11,12],
  [13,14,15,0]]
 
-[[1,0,3,0],  firstRow = false, firstCol = true
+[[0,0,3,0],  firstRow = false
  [0,0,7,8],
  [0,10,11,12],
  [0,14,15,0]]
