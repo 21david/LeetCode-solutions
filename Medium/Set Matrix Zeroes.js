@@ -6,6 +6,7 @@ TC = O(R * C)
 SC = O(R + C)
 
 See Set Matrix Zeroes.ts (TypeScript) for the better, constant-space solution.
+https://github.com/21david/LeetCode-problems-TypeScript/blob/main/Medium/Set%20Matrix%20Zeroes.ts
 */
 
 /**
