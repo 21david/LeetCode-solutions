@@ -1,6 +1,7 @@
 /*  
 TC O(N^2)
-SC O(1)
+Auxiliary SC O(1)
+Output SC O(N)
 */
 function pancakeSort(arr: number[]): number[] {
     const flip = k => {
