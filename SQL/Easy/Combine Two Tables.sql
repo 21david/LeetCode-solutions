@@ -1,8 +1,4 @@
-/*
-https://leetcode.com/problems/combine-two-tables/
-*/
-
-# Write your MySQL query statement below
+# https://leetcode.com/problems/combine-two-tables/
 
 SELECT FirstName, LastName, Address.City, Address.State
 FROM Person
