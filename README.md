@@ -1,25 +1,16 @@
 ## About
 
-This repository contains all the LeetCode problems I've solved in Java.  
-My goal is to master Java syntax, data structures, algorithms, problem analysis, complexity analysis, optimization techniques, and related software engineering skills through consistent practice.
+This repository contains all the LeetCode problems I've solved.  
+My goal is to master programming language syntax, data structures, algorithms, problem analysis, complexity analysis, optimization techniques, and related software engineering skills through consistent practice.
 
 I use this repository to:
 - Practice and reinforce algorithmic thinking
 - Improve problem-solving speed and accuracy
-- Deepen understanding of data structures and their applications in Java
+- Deepen understanding of data structures and algorithms and their applications
+- Discover and learn about more advanced data structures and algorithms
 
-**Problems Solved:** 120+
+**Problems Solved:** 750+
 
-**Topics Covered:** Arrays, Strings, Linked Lists, Trees, Graphs, Dynamic Programming, Backtracking, Sorting & Searching, Math, Stacks, Queues, Hash Tables, and more
+**Topics Covered:** Arrays, Matrices, Strings, Tries, Linked Lists, Doubly-Linked Lists, Trees (binary, N-ary, BST), Graphs (undirected, directed, DAGs), DFS, BFS, Union-Find, Topological Sorting, Recursion, Backtracking, Dynamic Programming (1D, 2D, 3D, memoization, top-down, tabulation/bottom-up), Sorting (Bubble, Selection, Insertion, Quick, Merge, Heap, Bucket, Counting), Binary Search, Math, Bit Manipulation (AND, OR, XOR, shifting bits, signed/unsigned bits), Prefix/Suffix Sums, Stacks (monotonic), Queues (priority/heap), Double-Ended Queues, Hash Tables (Sets and Maps), Two Pointers, Sliding Window, Line Sweep, Intervals, Design, and more
 
 **LeetCode Profile:** [david1121](https://leetcode.com/david1121/)
-
----
-
-### My Other LeetCode Solution Repositories
-
-- [LeetCode-problems-Python](https://github.com/21david/LeetCode-problems-Python)
-- [LeetCode-problems-JavaScript](https://github.com/21david/LeetCode-problems-JavaScript)
-- [LeetCode-problems-SQL](https://github.com/21david/LeetCode-problems-SQL)
-
----
