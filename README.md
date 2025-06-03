@@ -1,6 +1,6 @@
 ## About
 
-This repository contains all the LeetCode problems I've solved.  
+This repository contains many of the LeetCode problems I've solved.  
 My goal is to master programming language syntax, data structures, algorithms, problem analysis, complexity analysis, optimization techniques, and related software engineering skills through consistent practice.
 
 I use this repository to:
