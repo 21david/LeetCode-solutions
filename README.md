@@ -4,7 +4,7 @@ This repository contains many of the LeetCode problems I've solved.
 My goal is to master programming language syntax, data structures, algorithms, problem analysis, complexity analysis, optimization techniques, and related software engineering skills through consistent practice.
 
 I use this repository to:
-- Practice and reinforce algorithmic thinking
+- Practice and reinforce algorithmic thinking, critical thinking, and problem solving
 - Improve problem-solving speed and accuracy
 - Deepen understanding of data structures and algorithms and their applications
 - Discover and learn about more advanced data structures and algorithms
