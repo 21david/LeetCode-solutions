@@ -1,6 +1,6 @@
-// Solved during Omkar DSA session on IK
 // TC = O(N)
 // SC = O(N)
+// Can be optimized to O(1) space with only 2 rows
 class Solution {
     public int knightDialer(int n) {
         int mod = (int) 1e9+7;
