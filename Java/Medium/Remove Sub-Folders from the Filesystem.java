@@ -16,12 +16,15 @@ class Solution {
 
         Node root = new Node(false);
 
+        folderPaths:
         for (String folderPath : folderPaths) {
             String[] names = folderPath.substring(1).split("/");
 
             Node curr = root;
 
             for (String name : names) {
+                if (curr.isFolder) continue folderPaths;  // current path is a subfolder
+
                 // add name as child to children map in the current Node
                 if (!curr.children.containsKey(name))
                     curr.children.put(name, new Node(false));
