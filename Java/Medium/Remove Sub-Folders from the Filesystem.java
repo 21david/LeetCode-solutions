@@ -1,11 +1,11 @@
 class Solution {
     class Node { 
         public HashMap<String, Node> children;
-        public boolean isFolder;
+        public boolean isEndOfAPath;
 
         public Node(boolean isF) {
             children = new HashMap<>();
-            isFolder = isF;
+            isEndOfAPath = isF;
         }
     }
 
@@ -23,7 +23,7 @@ class Solution {
             Node curr = root;
 
             for (String name : names) {
-                if (curr.isFolder) continue folderPaths;  // current path is a subfolder
+                if (curr.isEndOfAPath) continue folderPaths;  // current path is a subfolder
 
                 // add name as child to children map in the current Node
                 if (!curr.children.containsKey(name))
@@ -32,7 +32,7 @@ class Solution {
             }
 
             // Set the last node as a folder
-            curr.isFolder = true;
+            curr.isEndOfAPath = true;
 
             // Delete any sub folders since they won't be needed
             curr.children = new HashMap<>();
@@ -49,7 +49,7 @@ class Solution {
     private Stack<String> names = new Stack<>();
 
     private void dfs(List<String> answer, Node currNode, String name) {
-        if (currNode.isFolder) {
+        if (currNode.isEndOfAPath) {
             // If its a folder, we can add to the answer and skip all sub folders
             answer.add(String.join("/", names)); 
             return;
