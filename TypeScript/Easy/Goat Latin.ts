@@ -1,3 +1,7 @@
+// TC = O(W^2), because variable 'as' creates a new string with the length
+//      of the current index every time (O(N) each time). This is O(C^2)
+//      in the worst case if each word is of length 1.
+// SC = O(W), W = number of words, but this is also O(C) in the worst case
 function toGoatLatin(sentence: string): string {
     const vowels = new Set('aeiouAEIOU');
     const words = sentence.split(' ');
