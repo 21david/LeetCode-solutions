@@ -1,4 +1,6 @@
 import java.io.PrintStream;
+// TC = O(2^N), for all recursive calls
+// SC = O(N), for the call stack
 class Solution {
     public int countMaxOrSubsets(int[] nums) {
         // PrintStream p = System.out;
@@ -27,3 +29,5 @@ class Solution {
         
     }
 }
+
+// Possible: optimize with memoization
