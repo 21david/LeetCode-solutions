@@ -1,4 +1,4 @@
-# TC = O(1) ?
+# TC = O(1)
 # SC = O(1)
 class Solution:
     def isPowerOfTwo(self, n: int) -> bool:
