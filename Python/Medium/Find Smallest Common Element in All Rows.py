@@ -29,3 +29,22 @@ class Solution:
             # If the for loop completed, then all pointers point to an equal value
             if all_equal:
                 return mat[0][pointers[0]]  # Arbitrarily pick the first row's pointer element
+
+
+# Solution after seeing the hints
+# TC = O(R * C)
+# SC = O(R * C)
+class Solution:
+    def smallestCommonElement(self, mat: List[List[int]]) -> int:
+        # Get counts of all numbers
+        R = len(mat)
+        counts = defaultdict(int)
+        for row in mat:
+            for num in row:
+                counts[num] += 1
+
+        # All numbers that appeared in all rows
+        intersections = [num for num, count in counts.items() if count == R]
+        if len(intersections) == 0: return -1
+        # Return the smallest one
+        return intersections[0]
