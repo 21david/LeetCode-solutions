@@ -1,8 +1,3 @@
-"""  
-TC = O(P^2)
-Aux SC = O(P), where P is the lengh of phrases
-Output SC = O(P^2) 
-"""
 class Solution:
     def beforeAndAfterPuzzles(self, phrases: List[str]) -> List[str]:
         ans = set()
