@@ -1,6 +1,7 @@
-# TC = O(T + B)
-# SC = O(T + B)
-# T = length of text, B = length of brokenLetters
+# TC = O(T)
+# SC = O(T)
+# T = length of text
+# brokenLetters is constrained to the 26 letters, so it is O(1)
 class Solution:
     def canBeTypedWords(self, text: str, brokenLetters: str) -> int:
         broken = set(brokenLetters)
