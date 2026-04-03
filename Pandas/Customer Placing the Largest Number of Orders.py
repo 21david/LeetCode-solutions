@@ -13,3 +13,14 @@ def largest_orders(orders: pd.DataFrame) -> pd.DataFrame:
     final_ans = winner.reset_index()[['customer_number']]
 
     return final_ans
+
+
+# Probably better version that uses as_index=False to prevent getting a series in the first place
+def largest_orders(orders: pd.DataFrame) -> pd.DataFrame:
+    # Group by customer_number and get the number of orders made by each one, sorted ascending
+    order_amts = orders.groupby('customer_number', as_index=False)['order_number'].count().sort_values(by='order_number')
+
+    # Get the customer with the most orders, as a dataframe with 1 column
+    winner = order_amts.tail(1)[['customer_number']]
+
+    return winner
