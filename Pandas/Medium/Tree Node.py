@@ -1,5 +1,7 @@
 import pandas as pd
 
+# See useful article: https://leetcode.com/problems/tree-node/solutions/4069661/pandas-4-methods-to-deal-with-conditions-qh50/?envType=problem-list-v2&envId=db-db3-grouping-aggregation
+
 # Approach: Create a function and use apply()
 def tree_node(tree: pd.DataFrame) -> pd.DataFrame:
     parents = set(tree.p_id.unique().dropna())
