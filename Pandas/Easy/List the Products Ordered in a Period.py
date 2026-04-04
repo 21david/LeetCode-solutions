@@ -1,11 +1,8 @@
 import pandas as pd
 
 def list_products(products: pd.DataFrame, orders: pd.DataFrame) -> pd.DataFrame:
-    # Create column to get just the unique months
-    orders['month'] = orders.order_date.astype(str).str[:7]
-
     # Remove non-February-2020 rows
-    orders = orders[orders.month == '2020-02']
+    orders = orders[(orders.order_date >= '2020-02-1') & (orders.order_date <= '2020-02-29')]
 
     # Group by month and product it to aggregate total sales for each one
     product_totals = orders.groupby('product_id', as_index=False)['unit'].sum()
