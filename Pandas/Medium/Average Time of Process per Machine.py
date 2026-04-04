@@ -4,10 +4,7 @@ def monthly_transactions(transactions: pd.DataFrame) -> pd.DataFrame:
     df = transactions
 
     # Make a column for unique months
-    df['temp_month'] = df['trans_date'].dt.month.astype(str)
-    df['temp_month'] = df['temp_month'].apply(lambda x: f'{x:0>2}')
-    df['year'] = df['trans_date'].dt.year.astype(str)
-    df['month'] = df['year'] + '-' + df['temp_month']
+    df['month'] = df['trans_date'].astype(str).str[:7]
 
     # Group by the unique months to get aggregated data
     # dropna=False so that 'null' countries still have their own group, as expected by LC (otherwise it drops those groups)
