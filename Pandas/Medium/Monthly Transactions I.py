@@ -3,19 +3,21 @@ import pandas as pd
 def monthly_transactions(transactions: pd.DataFrame) -> pd.DataFrame:
     df = transactions
 
-    # Make a column for unique months
+    # Make a column for just the months
     df['month'] = df['trans_date'].astype(str).str[:7]
 
-    # Group by the unique months to get aggregated data
+    # Group by the months to get aggregated data
     # dropna=False so that 'null' countries still have their own group, as expected by LC (otherwise it drops those groups)
+    # This gives all country-month combinations and aggregated data for ALL transactions
     gb = df.groupby(['country', 'month'], as_index=False, dropna=False).agg({'trans_date': 'count', 'amount':'sum'})
     print(gb)
 
-    # Group by unique months but filter by approved to get the approved aggregated data
+    # Group by unique months but filter by approved to get the aggregated data for approved rows only
+    # This gives all country-month combinations and aggregated data for only APPROVED transactions
     gb_appr = df.groupby(['country', 'month', 'state'], as_index=False, dropna=False).agg({'trans_date': 'count', 'amount':'sum'})
     gb_appr = gb_appr[gb_appr['state'] == 'approved']
 
-    # Merge all columns together and clean up
+    # Put all columns in the same table and clean up. 
     final_df = gb.merge(gb_appr, on=['country', 'month'], how = 'left')
     final_df.rename(columns={
         'trans_date_x': 'trans_count', 
